@@ -15,6 +15,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.postblog.Bloggart.dto.UserDto;
+import com.postblog.Bloggart.entity.UserEntity;
+import com.postblog.Bloggart.exceptions.EmailAlreadyExistsException;
 import com.postblog.Bloggart.service.UserService;
 
 @Controller
@@ -39,12 +41,22 @@ public class UserController {
 		return "login";
 
 	}
+
 	@PostMapping("/register/save")
-	public ModelAndView saveUser(@ModelAttribute("user") @Valid UserDto userDto,HttpServletRequest request,Errors errors) {
+	public ModelAndView saveUser(@ModelAttribute("user") @Valid UserDto userDto, HttpServletRequest request,
+			Errors errors) {
 //		userService.save(userDto);
 //		return "redirect:/home";
-		UserEntity user = 
-		
+//		UserEntity user = 
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			UserEntity userEntity = userService.save(userDto);
+		} catch (EmailAlreadyExistsException e) {
+			modelAndView.addObject("message", e.getMessage());
+			return modelAndView;
+		}
+		return new ModelAndView("home", "user", userDto.getUsername());
+
 	}
 //	
 }

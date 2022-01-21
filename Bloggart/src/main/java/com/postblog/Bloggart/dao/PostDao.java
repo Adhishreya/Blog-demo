@@ -10,7 +10,7 @@ import com.postblog.Bloggart.entity.UserEntity;
 
 @Repository
 public interface PostDao extends JpaRepository<PostEntity, String>{
-	List<PostEntity> findAllPostsByUserEntities(UserEntity userEntity);
+//	List<PostEntity> findAllPostsByUserEntities(UserEntity userEntity);
 	
 	PostEntity save(PostEntity post);
 
