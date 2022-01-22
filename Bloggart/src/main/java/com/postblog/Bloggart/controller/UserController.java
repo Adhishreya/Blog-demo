@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,10 +46,8 @@ public class UserController {
 
 //	@PostMapping("/user/register/save")
 	@RequestMapping(value = "/user/register/save", method = RequestMethod.POST)
-	public ModelAndView saveUser(@ModelAttribute("user") @Valid UserDto userDto, HttpServletRequest request,
-			Errors errors) {
-//		Model model ;
-//		model.addAttribute(null, model)
+	public ModelAndView saveUser(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult,
+			HttpServletRequest request, Errors errors) {
 		System.out.println(errors);
 		ModelAndView modelAndView = new ModelAndView();
 		try {

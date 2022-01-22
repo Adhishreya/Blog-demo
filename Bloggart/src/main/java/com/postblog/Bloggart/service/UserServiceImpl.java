@@ -2,8 +2,10 @@ package com.postblog.Bloggart.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,5 +57,9 @@ public class UserServiceImpl implements UserService {
 			throw new UsernameNotFoundException("Email not found!");
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), null);
 	}
-
+	
+	@Override
+	public List<GrantedAuthority> getGrantedAuthorities(UserEntity user){
+		
+	}
 }
