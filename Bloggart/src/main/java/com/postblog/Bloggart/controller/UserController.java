@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -34,7 +35,7 @@ public class UserController {
 
 	}
 
-	@GetMapping("/user/login")
+	@GetMapping("/login")
 	public String loginUser(WebRequest request, Model model) {
 		UserDto userDto = new UserDto();
 		model.addAttribute("user", userDto);
@@ -48,6 +49,7 @@ public class UserController {
 			Errors errors) {
 //		Model model ;
 //		model.addAttribute(null, model)
+		System.out.println(errors);
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			UserEntity userEntity = userService.save(userDto);
@@ -59,5 +61,10 @@ public class UserController {
 		return new ModelAndView("home", "user", userDto.getUsername());
 
 	}
+//	
+//	@RequestMapping(value="/user/login/verify",method=RequestMethod.POST)
+//	public ModelAndView authenticateUser(@ModelAttribute("user")UserDto userDto) {
+////		User
+//	}
 //	
 }

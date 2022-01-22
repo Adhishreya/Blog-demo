@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.postblog.Bloggart.service.UserService;
 
@@ -40,9 +41,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// enabling http security
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().permitAll();
-//		.authenticated().and().httpBasic();
-//		http.authorizeRequests().anyRequest().permitAll().
+//		antMatchers specfy the endpints that can be accessed
+		// by specifying formLogin() a default login page will be generated at the
+		// /login endpoint and the default redirection in case of login error would be
+		// /login
+		// here the endpoint is /user.login and this page is accessable to all
+		// to invalidate the session upon logout
+		http.authorizeRequests()
+				.antMatchers("/user/login**", "/js/**", "/css/**", "/img/**", "/home**", "/user/register/**")
+				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
+				.usernameParameter("email").defaultSuccessUrl("/home").failureForwardUrl("/login").permitAll().and().logout().invalidateHttpSession(true)
+				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login?logout").permitAll();
 		;
 	}
 }

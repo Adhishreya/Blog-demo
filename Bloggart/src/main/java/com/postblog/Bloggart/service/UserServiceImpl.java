@@ -49,8 +49,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+
+		UserEntity user = userDao.findByEmail(username);
+		if (user == null)
+			throw new UsernameNotFoundException("Email not found!");
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), null);
 	}
 
 }
