@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.postblog.Bloggart.entity.UserEntity;
 
 @Repository
-public interface UserDao extends JpaRepository<UserEntity, String> {
+public interface UserDao extends JpaRepository<UserEntity, Long> {
 	UserEntity findByEmail(String email);
 }

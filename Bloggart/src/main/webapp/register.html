@@ -48,11 +48,9 @@
 					id="userameControl" th:field="*{username}" type="text" required
 					class="form-control">
 				<p th:each="error:${#fields.errors('username')}" th:text="${error}"></p>
-				
 				<label for="emailControl"> Email </label> <input id="emailControl"
 					th:field="*{email}" type="email" required class="form-control">
 				<p th:each="error:${#fields.errors('email')}" th:text="${error}"></p>
-				<p class="text-danger" th:if="${message}" th:text="${message}"></p>
 				<label for="passwordControl"> Password </label> <input
 					id="passwordControl" th:field="*{password}" type="password"
 					required class="form-control">

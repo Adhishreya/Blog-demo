@@ -20,23 +20,22 @@ import javax.persistence.TemporalType;
 public class CommentEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Long id;
 
 //	@OneToMany
 //	private CommentEntity parentComment;
 
 //	@OneToMany
-	
-	
+
 	@ManyToOne
 	@JoinTable(name = "comment_post", joinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
 	private PostEntity post;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,7 +21,6 @@ import com.postblog.Bloggart.exceptions.EmailAlreadyExistsException;
 import com.postblog.Bloggart.service.UserService;
 
 @Controller
-//@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
@@ -42,17 +42,18 @@ public class UserController {
 
 	}
 
-	@PostMapping("/register/save")
+//	@PostMapping("/user/register/save")
+	@RequestMapping(value = "/user/register/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute("user") @Valid UserDto userDto, HttpServletRequest request,
 			Errors errors) {
-//		userService.save(userDto);
-//		return "redirect:/home";
-//		UserEntity user = 
+//		Model model ;
+//		model.addAttribute(null, model)
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			UserEntity userEntity = userService.save(userDto);
 		} catch (EmailAlreadyExistsException e) {
 			modelAndView.addObject("message", e.getMessage());
+			modelAndView.setViewName("register");
 			return modelAndView;
 		}
 		return new ModelAndView("home", "user", userDto.getUsername());

@@ -1,5 +1,8 @@
 package com.postblog.Bloggart.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -26,7 +29,12 @@ public class UserServiceImpl implements UserService {
 		userEntity.setEmail(user.getEmail());
 		userEntity.setUsername(user.getUsername());
 		userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
-		if (findByEmail(userEntity.getEmail()) != null) {
+
+		Date date = new Date();
+
+		userEntity.setJoinedOn(date);
+
+		if (findByEmail(userEntity.getEmail()) == null) {
 			return userDao.save(userEntity);
 		} else {
 			throw new EmailAlreadyExistsException();

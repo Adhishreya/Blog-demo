@@ -17,50 +17,64 @@ import javax.persistence.TemporalType;
 public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Long id;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public Date getJoinedOn() {
 		return joinedOn;
 	}
+
 	public void setJoinedOn(Date joinedOn) {
 		this.joinedOn = joinedOn;
 	}
+
 	public String getTwitterId() {
 		return twitterId;
 	}
+
 	public void setTwitterId(String twitterId) {
 		this.twitterId = twitterId;
 	}
+
 	public String getInstagramId() {
 		return instagramId;
 	}
+
 	public void setInstagramId(String instagramId) {
 		this.instagramId = instagramId;
 	}
+
 	private String username;
 	private String email;
 	private String password;
