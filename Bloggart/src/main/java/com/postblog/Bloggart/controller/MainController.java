@@ -17,6 +17,16 @@ public class MainController {
 //		model.addAttribute("m1","m2");
 		return "home";
 	}
+	
+	@GetMapping("/erorPage")
+	public String errorRequest() {
+//		model.addAttribute("m1","m2");
+		return "pagenotfound";
+	}
+	@GetMapping("/trending")
+	public String trendingRender() {
+		return "trending";
+	}
 
 //	@GetMapping("/edit")
 	@RequestMapping(value = "edit", method = RequestMethod.GET)

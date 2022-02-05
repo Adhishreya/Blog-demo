@@ -52,9 +52,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/user/login**", "/js/**", "/css/**", "/img/**", "/home**", "/user/register/**")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.usernameParameter("email").defaultSuccessUrl("/home").failureUrl("/login?error").permitAll().and().logout().invalidateHttpSession(true)
+				.usernameParameter("email").defaultSuccessUrl("/loginSuccess").failureUrl("/login?error").permitAll().and().logout().invalidateHttpSession(true)
 				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling().accessDeniedPage("/403").and().rememberMe().and();
+				.logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling().accessDeniedPage("/erorPage").and().rememberMe().and();
 		;
 	}
 }

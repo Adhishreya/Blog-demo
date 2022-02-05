@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,11 +24,17 @@ import com.postblog.Bloggart.exceptions.EmailAlreadyExistsException;
 import com.postblog.Bloggart.service.UserService;
 
 @Controller
+@SessionAttributes("user")
 public class UserController {
 
 	@Autowired
 	UserService userService;
-
+	
+	@GetMapping("/loginSuccess")
+	public String homePageRequest() {
+		return "loginSuccess";
+	}
+	
 	@GetMapping("/user/register")
 	public String registerUser(WebRequest request, Model model) {
 		UserDto userDto = new UserDto();
