@@ -35,7 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authProvider());
+//		auth.authenticationProvider(authProvider());
+		auth.userDetailsService(userService);
 	}
 
 	// enabling http security

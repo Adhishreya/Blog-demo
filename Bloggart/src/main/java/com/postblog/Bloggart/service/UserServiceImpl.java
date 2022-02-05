@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,12 +57,18 @@ public class UserServiceImpl implements UserService {
 		UserEntity user = userDao.findByEmail(username);
 		if (user == null)
 			throw new UsernameNotFoundException("Email not found!");
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), null);
+		boolean enabled = true;
+		boolean accountNonExpired = true;
+		boolean credentialsNonExpired = true;
+		boolean accountNonLocked = true;
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), enabled,
+				accountNonExpired, credentialsNonExpired, accountNonLocked, getGrantedAuthorities(user.getRole()));
 	}
-	
-	@Override
-	public List<GrantedAuthority> getGrantedAuthorities(UserEntity user){
-		List<GrantedAuthority> granted = new ArrayList();
-		granted.addAll(user.getRole()=="user");
+
+	private static List<GrantedAuthority> getGrantedAuthorities(String role) {
+		List<GrantedAuthority> granted = new ArrayList<>();
+//		granted.addAll(user.getRole()=="user");
+		granted.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		return granted;
 	}
 }

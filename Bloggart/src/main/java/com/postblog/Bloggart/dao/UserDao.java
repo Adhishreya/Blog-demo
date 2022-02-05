@@ -8,4 +8,5 @@ import com.postblog.Bloggart.entity.UserEntity;
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, Long> {
 	UserEntity findByEmail(String email);
+	UserEntity findByUsername(String username);
 }

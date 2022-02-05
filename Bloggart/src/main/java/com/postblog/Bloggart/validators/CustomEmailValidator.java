@@ -10,8 +10,9 @@ public class CustomEmailValidator implements ConstraintValidator<ValidEmail, Str
 	private Pattern pattern;
 	private Matcher matcher;
 
-	private final String emailPattern = "(_a-zA-Z0-9-+)+" + "(.a-zA-Z0-9)*@" + "(_a-zA-Z0-9)+(.a-zA-Z0-9)*"
-			+ "(.a-zA-Z0-9)$";
+//	private final String emailPattern = "(_a-zA-Z0-9-+)+" + "(.a-zA-Z0-9)*@" + "(_a-zA-Z0-9)+(.a-zA-Z0-9)*"
+//			+ "(.a-zA-Z0-9)$";
+	private static final String emailPattern = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$"; 
 
 	@Override
 	public void initialize(ValidEmail constraintAnnotation) {

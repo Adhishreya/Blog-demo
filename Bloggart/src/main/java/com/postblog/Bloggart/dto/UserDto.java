@@ -2,6 +2,7 @@ package com.postblog.Bloggart.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.postblog.Bloggart.validators.ValidEmail;
 
@@ -11,17 +12,18 @@ public class UserDto {
 //	private String firstName;
 
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="Username cannot be empty")
 	private String username;
 
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="Password cannot be empty")
+	@Size(min = 8,max=20,message="Password must be atleast {min} and less than {max} characters")
 	private String password;
 	private String matchingPassword;
 
 	@ValidEmail
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="Email cannot be empty")
 	private String email;
 
 	public String getUsername() {

@@ -48,6 +48,12 @@ public class UserController {
 	@RequestMapping(value = "/user/register/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult,
 			HttpServletRequest request, Errors errors) {
+		
+		if(bindingResult.hasErrors()) {
+			return new ModelAndView("register", "user", userDto);
+		}
+		
+		
 		System.out.println(errors);
 		ModelAndView modelAndView = new ModelAndView();
 		try {
