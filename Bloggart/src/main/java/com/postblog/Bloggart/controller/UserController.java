@@ -52,6 +52,7 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			UserEntity userEntity = userService.save(userDto);
+			
 		} catch (EmailAlreadyExistsException e) {
 			modelAndView.addObject("message", e.getMessage());
 			modelAndView.setViewName("register");

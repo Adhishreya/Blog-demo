@@ -10,8 +10,8 @@
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 </head>
-<body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="bg-secondary">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">BG</a>
 			<button class="navbar-toggler" type="button"
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container text-white">
 		<form action="#" method="post" th:action="@{/login}"
 			th:object="${user}">
 			<label for="emailControl"> Email </label> <input id="emailControl"
@@ -47,7 +47,7 @@
 
 		</form>
 		<p>
-			New user? <a th:href="@{/user/register}">Register</a>
+			New user? <a th:href="@{/user/register}" class="btn btn-primary text-light">Register</a>
 		</p>
 	</div>
 	<script

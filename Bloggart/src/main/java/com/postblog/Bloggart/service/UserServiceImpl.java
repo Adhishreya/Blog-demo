@@ -1,6 +1,7 @@
 package com.postblog.Bloggart.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +61,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<GrantedAuthority> getGrantedAuthorities(UserEntity user){
-		
+		List<GrantedAuthority> granted = new ArrayList();
+		granted.addAll(user.getRole()=="user");
 	}
 }

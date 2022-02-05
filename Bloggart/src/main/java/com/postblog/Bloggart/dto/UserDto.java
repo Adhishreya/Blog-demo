@@ -3,6 +3,8 @@ package com.postblog.Bloggart.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.postblog.Bloggart.validators.ValidEmail;
+
 public class UserDto {
 //	@NotNull
 //	@NotEmpty
@@ -17,6 +19,7 @@ public class UserDto {
 	private String password;
 	private String matchingPassword;
 
+	@ValidEmail
 	@NotNull
 	@NotEmpty
 	private String email;
