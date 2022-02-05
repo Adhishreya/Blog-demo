@@ -51,7 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// rememberMe() is a token based concept that retains the scope of the current user throughout the session 
 		http.authorizeRequests()
 				.antMatchers("/user/login**", "/js/**", "/css/**", "/img/**", "/home**", "/user/register/**")
-				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
+				.permitAll().and().formLogin().loginPage("/login")
 				.usernameParameter("email").defaultSuccessUrl("/loginSuccess").failureUrl("/login?error").permitAll().and().logout().invalidateHttpSession(true)
 				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling().accessDeniedPage("/erorPage").and().rememberMe().and();

@@ -10,9 +10,10 @@ import com.postblog.Bloggart.entity.PostEntity;
 public class PostController {
 	
 	
-//	@PostMapping("/post/save")
+//	@PostMapping("/load")
 //	public String savePost(@ModelAttribute("post")PostEntity postEntity) {
+//		System.out.println();
 //		
 //	}
-	
+//	
 }

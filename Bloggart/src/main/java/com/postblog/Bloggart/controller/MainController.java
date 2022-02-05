@@ -1,5 +1,8 @@
 package com.postblog.Bloggart.controller;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,21 +17,29 @@ import com.postblog.Bloggart.entity.PostEntity;
 public class MainController {
 	@GetMapping("/home")
 	public String homePageRequest() {
-//		model.addAttribute("m1","m2");
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		String currentPrincipalName = authentication.getName();
+//		System.out.println(currentPrincipalName);
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String currentUserName = authentication.getName();
+//			return currentUserName;
+			System.out.println(currentUserName);
+		}
 		return "home";
 	}
-	
+
 	@GetMapping("/erorPage")
 	public String errorRequest() {
-//		model.addAttribute("m1","m2");
 		return "pagenotfound";
 	}
+
 	@GetMapping("/trending")
 	public String trendingRender() {
 		return "trending";
 	}
 
-//	@GetMapping("/edit")
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public ModelAndView editPageRequest() {
 		ModelAndView modelAndView = new ModelAndView("edit", "post", new PostEntity());
