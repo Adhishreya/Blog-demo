@@ -1,5 +1,7 @@
 package com.postblog.Bloggart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +39,7 @@ public class PostController {
 		ModelAndView modelAndView = new ModelAndView("edit", "post", new PostEntity());
 		UserEntity entity = userService.findByEmail(email);
 		postService.postList(entity);
-		
+
 		return modelAndView;
 	}
 
@@ -48,7 +50,13 @@ public class PostController {
 		postService.savePost(postEntity);
 		return "home";
 	}
-	
-//	@RequestMapping(value ="/loginSuccess/post", method = RequestMethod.GET)
-//	public String onLoadLogin
+
+	@RequestMapping(value = "/loginSuccess/post", method = RequestMethod.GET)
+	public ModelAndView onLoadLogin(@ModelAttribute("successName") String email) {
+		UserEntity entity = userService.findByEmail(email);
+		List<PostEntity> postList = postService.postList(entity);
+		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postList);
+//		return "loginSuccess";
+		return modelAndView;
+	}
 }

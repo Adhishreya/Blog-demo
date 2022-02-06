@@ -19,11 +19,13 @@ public class PostService {
 		postDaol.save(post);
 	}
 	
-	public void postList(UserEntity user){
+	public List<PostEntity> postList(UserEntity user){
 		List<PostEntity> posts = postDaol.findAllByUser(user);
-		for(PostEntity p : posts) {
-			System.out.println(p);
-		}
+//		for(PostEntity p : posts) {
+//			System.out.println(p);
+//		}
+		
+		return posts;
 	}
 	
 }
