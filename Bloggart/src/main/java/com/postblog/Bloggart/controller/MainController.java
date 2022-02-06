@@ -36,9 +36,4 @@ public class MainController {
 		return "trending";
 	}
 
-	@RequestMapping(value = "edit", method = RequestMethod.GET)
-	public ModelAndView editPageRequest() {
-		ModelAndView modelAndView = new ModelAndView("edit", "post", new PostEntity());
-		return modelAndView;
-	}
 }

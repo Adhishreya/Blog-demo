@@ -25,32 +25,32 @@ import com.postblog.Bloggart.exceptions.EmailAlreadyExistsException;
 import com.postblog.Bloggart.service.UserService;
 
 @Controller
-@SessionAttributes("username")
+@SessionAttributes({"user","successName"})
 public class UserController {
 
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/loginSuccess")
-	public ModelAndView homePageRequest(Authentication authentication) {
-		ModelAndView model = new ModelAndView();
-		System.out.println("authentications is " + authentication.getPrincipal());
-		model.addObject("username", authentication.getName());
-		model.setViewName("loginSuccess");
-		return model;
-	}
-	
 //	@GetMapping("/loginSuccess")
-//	public String homePageRequest(Model model,Authentication authentication) {
-//		System.out.println("authentications is " + authentication);
-//		model.addAttribute("username", authentication.getName());
-//		return "loginSuccess";
+//	public ModelAndView homePageRequest(Authentication authentication) {
+//		ModelAndView model = new ModelAndView();
+//		System.out.println("authentications is " + authentication.getPrincipal());
+//		model.addObject("successName", authentication.getName());
+//		model.setViewName("loginSuccess");
+//		return model;
 //	}
+	
+	@GetMapping("/loginSuccess")
+	public String homePageRequest(Model model,Authentication authentication) {
+		System.out.println("authentications is " + authentication);
+		model.addAttribute("successName", authentication.getName());
+		return "redirect:/loginSuccess/post";
+	}
 
 	@GetMapping("/user/register")
 	public String registerUser(WebRequest request, Model model) {
 		UserDto userDto = new UserDto();
-		model.addAttribute("username", userDto);
+		model.addAttribute("user", userDto);
 		return "register";
 
 	}

@@ -23,6 +23,13 @@ public class UserEntity {
 //	@Column(name="role", columnDefinition = "default user")
 	private String role = "user";
 
+	@Override
+	public String toString() {
+		return "UserEntity [id=" + id + ", role=" + role + ", username=" + username + ", email=" + email + ", password="
+				+ password + ", joinedOn=" + joinedOn + ", twitterId=" + twitterId + ", instagramId=" + instagramId
+				+ "]";
+	}
+
 	public String getRole() {
 		return role;
 	}

@@ -9,11 +9,11 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-	<style>
-	.error{
-	color:red;
-	}	
-	</style>
+<style>
+.error {
+	color: red;
+}
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,8 +31,8 @@
 						aria-current="page" th:href="@{/home}">Home</a></li>
 				</ul>
 				<div class="d-flex justify-content-between">
-					<a class="btn btn-success me-2" th:href="@{/login}">Login</a>
-					<a class=" btn
+					<a class="btn btn-success me-2" th:href="@{/login}">Login</a> <a
+						class=" btn
 							btn-success" th:href="@{/register}">Register</a>
 				</div>
 			</div>
@@ -41,38 +41,23 @@
 	<div class="container">
 		<form action="#" method="post" th:action="@{/user/register/save}"
 			th:object="${user}">
-			<!-- 				<label for="firstNameControl"> First Name </label> <input -->
-			<!-- 					id="firstNameControl" th:field="*{firstName}" type="text" -->
-			<!-- 					class="form-control"> <label for="lastNameControl"> -->
-			<!-- 					<p th:each="error:${#fields.errors('firstName')}" -->
-			<!-- 						th:text="${error}"></p> Last Name -->
-			<!-- 				</label> <input id="lastNameControl" th:field="*{lastName}" type="text" -->
-			<!-- 					required class="form-control"> -->
-			<!-- 				<p th:each="error:${#fields.errors('lastName')}" th:text="${error}"></p> -->
 			<label for="userameControl"> Username </label> <input
-				id="userameControl" th:field="*{username}" type="text"
+				id="usernameControl" th:field="*{username}" type="text"
 				class="form-control">
-			<!-- 				<p th:each="error:${#fields.errors('username')}" th:text="${error}"></p> -->
-			<p th:if="${#fields.hasErrors('username')}" th:errorclass="form-field-error"
-				th:errors="*{username}" class="error">Incorrect date</p>
-
+			<p th:if="${#fields.hasErrors('username')}"
+				th:errorclass="form-field-error" th:errors="*{username}"
+				class="error"></p>
 
 			<label for="emailControl"> Email </label> <input id="emailControl"
-				th:field="*{email}" type="text"  class="form-control">
-			<p th:each="error:${#fields.errors('email')}" th:text="${error}" class="error"></p>
+				th:field="*{email}" type="text" class="form-control">
+			<p th:each="error:${#fields.errors('email')}" th:text="${error}"
+				class="error"></p>
 			<p class="text-danger" th:if="${message}" th:text="${message}"></p>
 			<label for="passwordControl"> Password </label> <input
-				id="passwordControl" th:field="*{password}" type="password" 
+				id="passwordControl" th:field="*{password}" type="password"
 				class="form-control">
-			<p th:each="error:${#fields.errors('password')}" th:text="${error}" class="error">
-			</p>
-
-			<!-- 				<label for="twitterControl"> Twitter </label> <input -->
-			<!-- 					id="twitterControl" th:field="*{twitterId}" type="text" -->
-			<!-- 					class="form-control"> <label for="instagramIdControl"> -->
-			<!-- 					Email </label> <input id="instagramIdControl" th:field="*{instagramId}" -->
-			<!-- 					type="text" class="form-control"> -->
-
+			<p th:each="error:${#fields.errors('password')}" th:text="${error}"
+				class="error"></p>
 			<button type="submit" class="btn btn-success mt-3">Register</button>
 
 		</form>

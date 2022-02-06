@@ -68,6 +68,12 @@ public class PostEntity {
 	@JoinTable(name = "post_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
 	private UserEntity user;
 
-	private Integer likes;
+	private Integer likes = 0;
+
+	@Override
+	public String toString() {
+		return "PostEntity [id=" + id + ", postHeader=" + postHeader + ", postBody=" + postBody + ", user=" + user
+				+ ", likes=" + likes + "]";
+	}
 
 }
