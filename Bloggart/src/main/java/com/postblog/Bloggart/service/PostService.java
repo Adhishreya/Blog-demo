@@ -20,12 +20,16 @@ public class PostService {
 	}
 	
 	public List<PostEntity> postList(UserEntity user){
-		List<PostEntity> posts = postDaol.findAllByUser(user);
-//		for(PostEntity p : posts) {
-//			System.out.println(p);
-//		}
-		
+		List<PostEntity> posts = postDaol.findAllByUser(user);		
 		return posts;
+	}
+	
+	public void deletePost(PostEntity post) {
+		postDaol.delete(post);
+	}
+	
+	public void deleteById(Long id) {
+		postDaol.deleteById(id);
 	}
 	
 }

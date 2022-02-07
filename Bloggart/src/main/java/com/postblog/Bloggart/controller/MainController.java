@@ -26,6 +26,11 @@ public class MainController {
 		return "home";
 	}
 
+	@GetMapping("/")
+	public String defaultPage() {
+		return "home";
+	}
+
 	@GetMapping("/erorPage")
 	public String errorRequest() {
 		return "pagenotfound";
@@ -34,6 +39,11 @@ public class MainController {
 	@GetMapping("/trending")
 	public String trendingRender() {
 		return "trending";
+	}
+
+	@GetMapping("/error")
+	public String pageNotFound() {
+		return "pagenotfound";
 	}
 
 }

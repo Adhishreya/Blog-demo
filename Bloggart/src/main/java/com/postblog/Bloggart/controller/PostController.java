@@ -3,12 +3,14 @@ package com.postblog.Bloggart.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,7 +50,7 @@ public class PostController {
 		UserEntity entity = userService.findByEmail(email);
 		postEntity.setUser(entity);
 		postService.savePost(postEntity);
-		return "home";
+		return "loginSuccess";
 	}
 
 	@RequestMapping(value = "/loginSuccess/post", method = RequestMethod.GET)
@@ -58,5 +60,14 @@ public class PostController {
 		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postList);
 //		return "loginSuccess";
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/deletePost", method = RequestMethod.GET)
+	public String deletePost(@RequestParam("id")Long id ) {
+//		System.out.println("delete request");
+//		postService.deletePost()
+//		System.out.println(id);
+		postService.deleteById(id);
+		return "home";
 	}
 }

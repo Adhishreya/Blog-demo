@@ -14,5 +14,9 @@ public interface PostDao extends JpaRepository<PostEntity, Long>{
 	
 	PostEntity save(PostEntity post);
 	
+	void delete(PostEntity post);
+	
+	void deleteById(Long id);
+	
 //	List<PostEntity> findAllPostsByEmailId
 }
