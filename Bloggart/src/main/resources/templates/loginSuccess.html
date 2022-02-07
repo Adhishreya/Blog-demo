@@ -46,59 +46,69 @@
 		<div class="container">
 
 			<ul class="list-group">
-				<li th:if="${postList.empty}">
+				<li list-group-item th:if="${postList.empty}">
 					<ul>No posts available
 					</ul>
 				</li>
 				<li class="list-group-item" th:each="postUnit : ${postList}">
 					<div class="d-flext">
-						<div class="fw-bold" th:text="${postUnit.postHeader}"></div>
-						<div th:text="${postUnit.postBody}"></div>
-						~<small th:text="${postUnit.postedAtAt}"></small>
-						<div class="d-flex w-100">
-							<i class="bi bi-heart mx-2"></i>
-							<div th:text=${postUnit.likes}></div>
+						<div th:each="userEntity : ${postUnit.user}">
+							<small th:text="${userEntity.username}"></small>
 
 
-							<i class="bi bi-trash-fill" data-bs-toggle="modal"
-								data-bs-target="#exampleModal"></i>
+							<div class="fw-bold" th:text="${postUnit.postHeader}"></div>
+							<div th:text="${postUnit.postBody}"></div>
+							~<small th:text="${postUnit.postedAtAt}"></small>
+							<div class="d-flex w-100">
+								<i class="bi bi-heart mx-2"></i>
+								<div th:text=${postUnit.likes}></div>
 
-							<!-- Modal -->
-							<div class="modal fade" id="exampleModal" tabindex="-1"
-								aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Delete
-												Post</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p class="text-danger">This operation cannot be undone</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Close</button>
-											<!-- 											<button type="button" class="btn btn-primary">Save -->
-											<!-- 												changes</button> -->
-											<!-- 											<form action="#" method="post" th:action="@{/deletePost}" -->
-											<!-- 												th:object="${postUnit}"> -->
-											<!-- 												<button class="btn btn-success me-2" type="submit">Confirm</button> -->
-											<!-- 												<a class="btn btn-success me-2" th:href="@{'/deletePost'(id=${postUnit.id})/}">Confirm</a> -->
-											<a class="btn btn-success me-2" th:href="@{/deletePost(id=${postUnit.id})}">Confirm</a>
-											<!-- 											</form> -->
+								<div th:if="${successName == userEntity.email}">
+									<i class="bi bi-trash-fill" data-bs-toggle="modal"
+										data-bs-target="#exampleModal"></i>
+								</div>
+								<div th:if="${successName != userEntity.email}">
+									<i class="bi bi-reply-fill"></i>
+								</div>
+
+
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Delete
+													Post</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<p class="text-danger">This operation cannot be undone</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
+												<!-- 											<button type="button" class="btn btn-primary">Save -->
+												<!-- 												changes</button> -->
+												<!-- 											<form action="#" method="post" th:action="@{/deletePost}" -->
+												<!-- 												th:object="${postUnit}"> -->
+												<!-- 												<button class="btn btn-success me-2" type="submit">Confirm</button> -->
+												<!-- 												<a class="btn btn-success me-2" th:href="@{'/deletePost'(id=${postUnit.id})/}">Confirm</a> -->
+												<a class="btn btn-success me-2"
+													th:href="@{/deletePost(id=${postUnit.id})}">Confirm</a>
+												<!-- 											</form> -->
+											</div>
 										</div>
 									</div>
 								</div>
+
+
+								<!-- 							<a><i class="bi bi-trash-fill"></i></a> -->
+								<!-- 							<i -->
+								<!-- 								class="bi bi-three-dots-vertical justify-self-end align-items-center"></i> -->
 							</div>
-
-
-							<!-- 							<a><i class="bi bi-trash-fill"></i></a> -->
-							<!-- 							<i -->
-							<!-- 								class="bi bi-three-dots-vertical justify-self-end align-items-center"></i> -->
 						</div>
-
 					</div>
 				</li>
 			</ul>

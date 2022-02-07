@@ -12,6 +12,8 @@ import com.postblog.Bloggart.entity.UserEntity;
 public interface PostDao extends JpaRepository<PostEntity, Long>{
 	List<PostEntity> findAllByUser(UserEntity userEntity);
 	
+	List<PostEntity> findAll();
+	
 	PostEntity save(PostEntity post);
 	
 	void delete(PostEntity post);

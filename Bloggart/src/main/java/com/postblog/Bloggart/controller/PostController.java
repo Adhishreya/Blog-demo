@@ -40,7 +40,7 @@ public class PostController {
 	public ModelAndView editPageRequest(@ModelAttribute("successName") String email) {
 		ModelAndView modelAndView = new ModelAndView("edit", "post", new PostEntity());
 		UserEntity entity = userService.findByEmail(email);
-		postService.postList(entity);
+//		postService.postList(entity);
 
 		return modelAndView;
 	}
@@ -56,7 +56,7 @@ public class PostController {
 	@RequestMapping(value = "/loginSuccess/post", method = RequestMethod.GET)
 	public ModelAndView onLoadLogin(@ModelAttribute("successName") String email) {
 		UserEntity entity = userService.findByEmail(email);
-		List<PostEntity> postList = postService.postList(entity);
+		List<PostEntity> postList = postService.postFindAll();
 		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postList);
 //		return "loginSuccess";
 		return modelAndView;
