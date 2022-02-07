@@ -19,7 +19,7 @@ import com.postblog.Bloggart.entity.UserEntity;
 import com.postblog.Bloggart.service.PostService;
 import com.postblog.Bloggart.service.UserService;
 
-@SessionAttributes({ "successName" })
+@SessionAttributes({ "successName", "postList" })
 @Controller
 public class PostController {
 
@@ -50,7 +50,7 @@ public class PostController {
 		UserEntity entity = userService.findByEmail(email);
 		postEntity.setUser(entity);
 		postService.savePost(postEntity);
-		return "loginSuccess";
+		return "redirect:/loginSuccess/post";
 	}
 
 	@RequestMapping(value = "/loginSuccess/post", method = RequestMethod.GET)
@@ -63,11 +63,8 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/deletePost", method = RequestMethod.GET)
-	public String deletePost(@RequestParam("id")Long id ) {
-//		System.out.println("delete request");
-//		postService.deletePost()
-//		System.out.println(id);
+	public String deletePost(@RequestParam("id") Long id) {
 		postService.deleteById(id);
-		return "home";
+		return "redirect:/loginSuccess/post";
 	}
 }

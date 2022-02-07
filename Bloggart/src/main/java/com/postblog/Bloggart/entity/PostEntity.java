@@ -1,5 +1,6 @@
 package com.postblog.Bloggart.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "post")
@@ -62,7 +65,17 @@ public class PostEntity {
 
 	private String postBody;
 
+	@Temporal(TemporalType.DATE)
+	private Date postedAtAt = new Date();
 //	private List<String> images;
+
+	public Date getPostedAtAt() {
+		return postedAtAt;
+	}
+
+	public void setPostedAtAt(Date postedAtAt) {
+		this.postedAtAt = postedAtAt;
+	}
 
 	@ManyToOne
 	@JoinTable(name = "post_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
@@ -72,8 +85,8 @@ public class PostEntity {
 
 	@Override
 	public String toString() {
-		return "PostEntity [id=" + id + ", postHeader=" + postHeader + ", postBody=" + postBody + ", user=" + user
-				+ ", likes=" + likes + "]";
+		return "PostEntity [id=" + id + ", postHeader=" + postHeader + ", postBody=" + postBody + ", postedAtAt="
+				+ postedAtAt + ", user=" + user + ", likes=" + likes + "]";
 	}
 
 }
