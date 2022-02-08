@@ -15,6 +15,12 @@ import com.postblog.Bloggart.entity.PostEntity;
 
 @Controller
 public class MainController {
+
+	@ModelAttribute("successName")
+	private String setSessionName() {
+		return "";
+	}
+
 	@GetMapping("/home")
 	public String homePageRequest() {
 		return "redirect:/home/post";

@@ -29,12 +29,16 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 
+	@ModelAttribute("successName")
+	private String setSessionName() {
+		return "";
+	}
+//	private String name;
+
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
-	public ModelAndView editPageRequest(@ModelAttribute("successName") String email) {
+	public ModelAndView editPageRequest(@ModelAttribute("successName") String email,Model model) {
 		ModelAndView modelAndView = new ModelAndView("edit", "post", new PostEntity());
 		UserEntity entity = userService.findByEmail(email);
-//		postService.postList(entity);
-
 		return modelAndView;
 	}
 
@@ -53,7 +57,7 @@ public class PostController {
 		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postList);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/home/post", method = RequestMethod.GET)
 	public ModelAndView homeRender() {
 		List<PostEntity> postList = postService.postFindAll();
