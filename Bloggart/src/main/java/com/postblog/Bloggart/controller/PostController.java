@@ -29,13 +29,6 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 
-//	@PostMapping("/load")
-//	public String savePost(@ModelAttribute("post")PostEntity postEntity) {
-//		System.out.println();
-//		
-//	}
-//	
-
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public ModelAndView editPageRequest(@ModelAttribute("successName") String email) {
 		ModelAndView modelAndView = new ModelAndView("edit", "post", new PostEntity());

@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// to invalidate the session upon logout
 		// rememberMe() is a token based concept that retains the scope of the current user throughout the session 
 		http.authorizeRequests()
-				.antMatchers("/user/login**", "/js/**", "/css/**", "/img/**", "/home**", "/user/register/**")
+				.antMatchers("/user/login**", "/js/**", "/css/**", "/img/**", "/home**", "/user/register/**","sw.js/")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
 				.usernameParameter("email").defaultSuccessUrl("/loginSuccess").failureUrl("/login?error").permitAll().and().logout().invalidateHttpSession(true)
 				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

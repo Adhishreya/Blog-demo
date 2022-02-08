@@ -68,7 +68,8 @@
 										data-bs-target="#exampleModal"></i>
 								</div>
 								<div th:if="${successName != userEntity.email}">
-									<i class="bi bi-reply-fill"></i>
+									<a th:href="@{/comment(id=${postUnit.id})}"><i
+										class="bi bi-reply-fill"></i></a>
 								</div>
 
 

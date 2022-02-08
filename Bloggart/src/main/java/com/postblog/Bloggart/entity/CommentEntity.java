@@ -22,17 +22,28 @@ public class CommentEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@OneToMany
-//	private CommentEntity parentComment;
-
-//	@OneToMany
-
 	@ManyToOne
 	@JoinTable(name = "comment_post", joinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
 	private PostEntity post;
 
 	public Long getId() {
 		return id;
+	}
+
+	private String comment;
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	@Override
+	public String toString() {
+		return "CommentEntity [id=" + id + ", post=" + post + ", comment=" + comment + ", parentEntity=" + parentEntity
+				+ ", user=" + user + ", commentedAt=" + commentedAt + ", likes=" + likes + "]";
 	}
 
 	public void setId(Long id) {

@@ -35,6 +35,11 @@ public class PostService {
 		postDaol.delete(post);
 	}
 
+	public PostEntity findById(Long id) {
+		List<PostEntity> postEnt = (List<PostEntity>) postDaol.findById(id).get();
+		return postEnt.get(0);
+	}
+
 	public void deleteById(Long id) {
 		postDaol.deleteById(id);
 	}

@@ -1,6 +1,7 @@
 package com.postblog.Bloggart.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,16 +10,18 @@ import com.postblog.Bloggart.entity.PostEntity;
 import com.postblog.Bloggart.entity.UserEntity;
 
 @Repository
-public interface PostDao extends JpaRepository<PostEntity, Long>{
+public interface PostDao extends JpaRepository<PostEntity, Long> {
 	List<PostEntity> findAllByUser(UserEntity userEntity);
-	
+
 	List<PostEntity> findAll();
-	
+
 	PostEntity save(PostEntity post);
-	
+
 	void delete(PostEntity post);
-	
+
 	void deleteById(Long id);
-	
+
+	Optional<PostEntity> findById(Long id);
+
 //	List<PostEntity> findAllPostsByEmailId
 }
