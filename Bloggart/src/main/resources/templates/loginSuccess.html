@@ -29,10 +29,9 @@
 				</ul>
 				<div class="d-flex justify-content-between">
 					<!-- 					<a class="btn btn-success me-2" th:text="${successName}"></a>  -->
-					<a class="btn btn-success me-2" th:href="@{/user(email=${successName})}"><i
+					<a class="btn btn-success me-2" th:href="@{/profile}"><i
 						class="bi bi-person "></i></a> <a class="btn btn-success me-2"
 						th:href="@{/logout}">Logout</a>
-					<!-- 						<a class="btn btn-success" th:href="@{/user/register}">Register</a> -->
 				</div>
 			</div>
 		</div>
@@ -64,6 +63,8 @@
 							<div class="d-flex w-100">
 								<i class="bi bi-heart mx-2"></i>
 								<div th:text=${postUnit.likes}></div>
+
+								<i class="bi bi-menu-up mx-2"></i>
 
 								<div th:if="${successName == userEntity.email}">
 									<i class="bi bi-trash-fill" data-bs-toggle="modal"

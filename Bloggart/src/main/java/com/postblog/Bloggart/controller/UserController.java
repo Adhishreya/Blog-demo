@@ -25,7 +25,7 @@ import com.postblog.Bloggart.exceptions.EmailAlreadyExistsException;
 import com.postblog.Bloggart.service.UserService;
 
 @Controller
-@SessionAttributes({"user","successName"})
+@SessionAttributes({ "user", "successName" })
 public class UserController {
 
 	@Autowired
@@ -39,9 +39,9 @@ public class UserController {
 //		model.setViewName("loginSuccess");
 //		return model;
 //	}
-	
+
 	@GetMapping("/loginSuccess")
-	public String homePageRequest(Model model,Authentication authentication) {
+	public String homePageRequest(Model model, Authentication authentication) {
 		System.out.println("authentications is " + authentication);
 		model.addAttribute("successName", authentication.getName());
 		return "redirect:/loginSuccess/post";
@@ -85,10 +85,12 @@ public class UserController {
 		return new ModelAndView("home", "user", userDto.getUsername());
 
 	}
-//	
-//	@RequestMapping(value="/user/login/verify",method=RequestMethod.POST)
-//	public ModelAndView authenticateUser(@ModelAttribute("user")UserDto userDto) {
-////		User
-//	}
-//	
+
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView authenticateUser(@ModelAttribute("successName") String email) {
+		UserEntity userE = userService.findByEmail(email);
+		System.out.println(userE);
+		return new ModelAndView("user", "userE", userE);
+	}
+
 }
