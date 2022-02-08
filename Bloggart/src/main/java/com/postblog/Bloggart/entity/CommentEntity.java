@@ -97,7 +97,7 @@ public class CommentEntity {
 	private UserEntity user;
 
 	@Temporal(TemporalType.DATE)
-	private Date commentedAt;
+	private Date commentedAt = new Date();;
 
 	private Integer likes;
 

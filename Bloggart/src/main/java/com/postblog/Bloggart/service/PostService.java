@@ -36,8 +36,8 @@ public class PostService {
 	}
 
 	public PostEntity findById(Long id) {
-		List<PostEntity> postEnt = (List<PostEntity>) postDaol.findById(id).get();
-		return postEnt.get(0);
+		PostEntity entityPost = postDaol.findById(id).get();
+		return entityPost;
 	}
 
 	public void deleteById(Long id) {

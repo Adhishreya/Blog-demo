@@ -16,11 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.postblog.Bloggart.entity.CommentEntity;
 import com.postblog.Bloggart.entity.PostEntity;
 import com.postblog.Bloggart.entity.UserEntity;
+import com.postblog.Bloggart.service.CommentService;
 import com.postblog.Bloggart.service.PostService;
 import com.postblog.Bloggart.service.UserService;
 
 @Controller
-@SessionAttributes({ "successName","id" })
+@SessionAttributes({ "successName", "id" })
 public class CommentController {
 
 	@Autowired
@@ -28,6 +29,9 @@ public class CommentController {
 
 	@Autowired
 	private PostService postService;
+
+	@Autowired
+	private CommentService commentService;
 
 	@RequestMapping(value = "/comment", method = RequestMethod.GET)
 	public ModelAndView comment(@RequestParam("id") Long id, Model model) {
@@ -41,9 +45,11 @@ public class CommentController {
 		UserEntity entity = userService.findByEmail(email);
 
 		PostEntity postEntity = postService.findById(id);
-//		List<PostEntity> postL = new ArrayList<>();
-//		postL.add(postEntity);
- 		commentEntity.setPost(postEntity);
+		commentEntity.setPost(postEntity);
+		commentEntity.setUser(entity);
+
+		commentService.save(commentEntity);
+
 		System.out.println(commentEntity);
 		return "redirect:/loginSuccess/post";
 	}

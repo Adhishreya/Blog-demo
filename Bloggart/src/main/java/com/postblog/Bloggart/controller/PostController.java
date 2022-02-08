@@ -51,7 +51,13 @@ public class PostController {
 		UserEntity entity = userService.findByEmail(email);
 		List<PostEntity> postList = postService.postFindAll();
 		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postList);
-//		return "loginSuccess";
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/home/post", method = RequestMethod.GET)
+	public ModelAndView homeRender() {
+		List<PostEntity> postList = postService.postFindAll();
+		ModelAndView modelAndView = new ModelAndView("home", "postList", postList);
 		return modelAndView;
 	}
 

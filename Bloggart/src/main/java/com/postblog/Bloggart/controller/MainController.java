@@ -17,18 +17,12 @@ import com.postblog.Bloggart.entity.PostEntity;
 public class MainController {
 	@GetMapping("/home")
 	public String homePageRequest() {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-//			String currentUserName = authentication.getName();
-////			return currentUserName;
-//			System.out.println(authentication);
-//		}
-		return "home";
+		return "redirect:/home/post";
 	}
 
 	@GetMapping("/")
 	public String defaultPage() {
-		return "home";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/erorPage")
