@@ -71,4 +71,20 @@ public class UserServiceImpl implements UserService {
 		granted.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		return granted;
 	}
+
+	@Override
+	public UserEntity update(UserEntity user) {
+		UserEntity entity = userDao.save(user);
+		return null;
+	}
+
+	@Override
+	public Integer updateTwitterId(String twitter, String email) {
+		return userDao.updateTwitterId(twitter, email);
+	}
+	
+	@Override
+	public Integer updateInstagramId(String instagram, String email) {
+		return userDao.updateInstagramId(instagram, email);
+	}
 }

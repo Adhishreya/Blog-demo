@@ -40,6 +40,42 @@ public class UserController {
 //		return model;
 //	}
 
+	@ModelAttribute("successName")
+	private String setSessionName() {
+		return "";
+	}
+
+	@ModelAttribute("twitter")
+	public UserDto twitterHandle() {
+		return new UserDto();
+	}
+
+	@ModelAttribute("instagram")
+	public UserDto instagramHandle() {
+		return new UserDto();
+	}
+
+	@PostMapping("/twitter/save")
+	public String setTwitter(@ModelAttribute("twitter") UserDto twitter, @ModelAttribute("successName") String email) {
+		System.out.println(twitter);
+		userService.updateTwitterId(twitter.getTwitterId(), email);
+//		UserEntity userE = userService.findByEmail(email);
+//		userE.setTwitterId(twitter);
+//		userService.update(userE);
+		return "redirect:/profile";
+	}
+
+	@PostMapping("/instagram/save")
+	public String setInstagram(@ModelAttribute("instagram") UserDto instagram,
+			@ModelAttribute("successName") String email) {
+//		UserEntity userE = userService.findByEmail(email);
+//		userE.setInstagramId(instagram);
+//		System.out.println(instagram);
+//		userService.update(userE);
+		userService.updateInstagramId(instagram.getInstagramID(), email);
+		return "/profile";
+	}
+
 	@GetMapping("/loginSuccess")
 	public String homePageRequest(Model model, Authentication authentication) {
 		System.out.println("authentications is " + authentication);
@@ -63,7 +99,6 @@ public class UserController {
 
 	}
 
-//	@PostMapping("/user/register/save")
 	@RequestMapping(value = "/user/register/save", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult,
 			HttpServletRequest request, Errors errors) {

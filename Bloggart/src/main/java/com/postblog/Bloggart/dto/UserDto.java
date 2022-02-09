@@ -25,6 +25,31 @@ public class UserDto {
 	@NotNull
 	@NotEmpty(message="Email cannot be empty")
 	private String email;
+	
+	private String twitterId;
+	private String instagramID;
+
+	@Override
+	public String toString() {
+		return "UserDto [username=" + username + ", password=" + password + ", matchingPassword=" + matchingPassword
+				+ ", email=" + email + ", twitterId=" + twitterId + ", instagramID=" + instagramID + "]";
+	}
+
+	public String getTwitterId() {
+		return twitterId;
+	}
+
+	public void setTwitterId(String twitterId) {
+		this.twitterId = twitterId;
+	}
+
+	public String getInstagramID() {
+		return instagramID;
+	}
+
+	public void setInstagramID(String instagramID) {
+		this.instagramID = instagramID;
+	}
 
 	public String getUsername() {
 		return username;

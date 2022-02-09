@@ -36,31 +36,41 @@
 		</div>
 	</nav>
 	<div class="container  mt-2 h-100">
-		<ul class="list-group bg-secondary" th:object="${userE}">
+		<!-- 		<ul th:if="${userE == null||userE.empty}"></ul> -->
+		<ul th:if="${userE}" class="list-group bg-secondary"
+			th:object="${userE}">
 			<li class="list-group-item bg-secondary" th:text="${userE.username}"></li>
 			<li class="list-group-item bg-secondary" th:text="${userE.email}"></li>
 			<li class="list-group-item bg-secondary"><i
-				class="bi bi-calendar-date mx-2"></i><span th:text="${userE.joinedOn}"></span>
-			</li>
+				class="bi bi-calendar-date mx-2"></i><span
+				th:text="${userE.joinedOn}"></span></li>
 			<li class="list-group-item bg-secondary">
-				<form class="w-80 d-flex">
-					<label for="exampleFormControlInput1"> <i
-						class="bi bi-twitter mx-2"></i></label> <input type="text"
-						class="form-control w-50" id="exampleFormControlInput1"
-						placeholder="name">
+				<form class="w-80 d-flex" th:action="@{/twitter/save}" method="post">
+					<label for="exampleFormControlInput1" th:object="${twitter}">
+						<i class="bi bi-twitter mx-2"></i>
+					</label> <input type="text" class="form-control w-50"
+						id="exampleFormControlInput1" placeholder="twitter124"
+						th:field="*{twitterId}" th:value="${userE.twitterId}?:''	">
+					<button class="btn btn-primary mx-2" type="submit">Save</button>
 				</form>
 			</li>
 
-			<li class="list-group-item bg-secondary ">
-				<form class="w-80 d-flex">
+			<li class="list-group-item bg-secondary">
+				<form class="w-80 d-flex" th:action="@{/instagram/save}"
+					method="post" th:object="${instagram}">
 					<label for="exampleFormControlInput1"> <i
 						class="bi bi-instagram mx-2"></i></label> <input type="text"
 						class="form-control w-50" id="exampleFormControlInput1"
-						placeholder="name">
+						th:field="*{instagramID}" placeholder="insta12"
+						th:value="${userE.instagramId}?:''	">
+					<button class="btn btn-primary mx-2" type="submit">Save</button>
 				</form>
 			</li>
 		</ul>
 	</div>
+
+	<button class="btn btn-danger">Delete Account</button>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
