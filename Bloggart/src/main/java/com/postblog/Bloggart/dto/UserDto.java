@@ -12,27 +12,27 @@ public class UserDto {
 //	private String firstName;
 
 	@NotNull
-	@NotEmpty(message="Username cannot be empty")
+	@NotEmpty(message = "Username cannot be empty")
 	private String username;
 
 	@NotNull
-	@NotEmpty(message="Password cannot be empty")
-	@Size(min = 8,max=20,message="Password must be atleast {min} and less than {max} characters")
+	@NotEmpty(message = "Password cannot be empty")
+	@Size(min = 8, max = 20, message = "Password must be atleast {min} and less than {max} characters")
 	private String password;
 	private String matchingPassword;
 
 	@ValidEmail
 	@NotNull
-	@NotEmpty(message="Email cannot be empty")
+	@NotEmpty(message = "Email cannot be empty")
 	private String email;
-	
+
 	private String twitterId;
-	private String instagramID;
+	private String instagramId;
 
 	@Override
 	public String toString() {
 		return "UserDto [username=" + username + ", password=" + password + ", matchingPassword=" + matchingPassword
-				+ ", email=" + email + ", twitterId=" + twitterId + ", instagramID=" + instagramID + "]";
+				+ ", email=" + email + ", twitterId=" + twitterId + ", instagramId=" + instagramId + "]";
 	}
 
 	public String getTwitterId() {
@@ -43,12 +43,12 @@ public class UserDto {
 		this.twitterId = twitterId;
 	}
 
-	public String getInstagramID() {
-		return instagramID;
+	public String getInstagramId() {
+		return instagramId;
 	}
 
-	public void setInstagramID(String instagramID) {
-		this.instagramID = instagramID;
+	public void setInstagramId(String instagramId) {
+		this.instagramId = instagramId;
 	}
 
 	public String getUsername() {

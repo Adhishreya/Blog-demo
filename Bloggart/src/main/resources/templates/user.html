@@ -46,7 +46,7 @@
 				th:text="${userE.joinedOn}"></span></li>
 			<li class="list-group-item bg-secondary">
 				<form class="w-80 d-flex" th:action="@{/twitter/save}" method="post">
-					<label for="exampleFormControlInput1" th:object="${twitter}">
+					<label for="exampleFormControlInput1" th:object="${updateUser}">
 						<i class="bi bi-twitter mx-2"></i>
 					</label> <input type="text" class="form-control w-50"
 						id="exampleFormControlInput1" placeholder="twitter124"
@@ -57,11 +57,11 @@
 
 			<li class="list-group-item bg-secondary">
 				<form class="w-80 d-flex" th:action="@{/instagram/save}"
-					method="post" th:object="${instagram}">
-					<label for="exampleFormControlInput1"> <i
+					method="post" >
+					<label for="exampleFormControlInput1" th:object="${updateUser}"> <i
 						class="bi bi-instagram mx-2"></i></label> <input type="text"
 						class="form-control w-50" id="exampleFormControlInput1"
-						th:field="*{instagramID}" placeholder="insta12"
+						th:field="*{instagramId}" placeholder="insta12"
 						th:value="${userE.instagramId}?:''	">
 					<button class="btn btn-primary mx-2" type="submit">Save</button>
 				</form>

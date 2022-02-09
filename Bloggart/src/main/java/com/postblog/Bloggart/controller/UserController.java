@@ -45,18 +45,19 @@ public class UserController {
 		return "";
 	}
 
-	@ModelAttribute("twitter")
-	public UserDto twitterHandle() {
+	@ModelAttribute("updateUser")
+	public UserDto updateUser() {
 		return new UserDto();
 	}
 
-	@ModelAttribute("instagram")
-	public UserDto instagramHandle() {
-		return new UserDto();
-	}
+//	@ModelAttribute("instagram")
+//	public UserDto instagramHandle() {
+//		return new UserDto();
+//	}
 
 	@PostMapping("/twitter/save")
-	public String setTwitter(@ModelAttribute("twitter") UserDto twitter, @ModelAttribute("successName") String email) {
+	public String setTwitter(@ModelAttribute("updateUser") UserDto twitter,
+			@ModelAttribute("successName") String email) {
 		System.out.println(twitter);
 		userService.updateTwitterId(twitter.getTwitterId(), email);
 //		UserEntity userE = userService.findByEmail(email);
@@ -66,14 +67,14 @@ public class UserController {
 	}
 
 	@PostMapping("/instagram/save")
-	public String setInstagram(@ModelAttribute("instagram") UserDto instagram,
+	public String setInstagram(@ModelAttribute("updateUser") UserDto instagram,
 			@ModelAttribute("successName") String email) {
 //		UserEntity userE = userService.findByEmail(email);
 //		userE.setInstagramId(instagram);
 //		System.out.println(instagram);
 //		userService.update(userE);
-		userService.updateInstagramId(instagram.getInstagramID(), email);
-		return "/profile";
+		userService.updateInstagramId(instagram.getInstagramId(), email);
+		return "redirect:/profile";
 	}
 
 	@GetMapping("/loginSuccess")
