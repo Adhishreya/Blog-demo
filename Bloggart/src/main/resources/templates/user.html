@@ -57,19 +57,23 @@
 
 			<li class="list-group-item bg-secondary">
 				<form class="w-80 d-flex" th:action="@{/instagram/save}"
-					method="post" >
-					<label for="exampleFormControlInput1" th:object="${updateUser}"> <i
-						class="bi bi-instagram mx-2"></i></label> <input type="text"
-						class="form-control w-50" id="exampleFormControlInput1"
-						th:field="*{instagramId}" placeholder="insta12"
-						th:value="${userE.instagramId}?:''	">
+					method="post">
+					<label for="exampleFormControlInput1" th:object="${updateUser}">
+						<i class="bi bi-instagram mx-2"></i>
+					</label> <input type="text" class="form-control w-50"
+						id="exampleFormControlInput1" th:field="*{instagramId}"
+						placeholder="insta12" th:value="${userE.instagramId}?:''	">
 					<button class="btn btn-primary mx-2" type="submit">Save</button>
 				</form>
 			</li>
+			<!-- 			<li > -->
+			<a class="btn btn-danger" style="width: 15%"
+				th:href="@{${'delete/'+userE.id}}">Delete Account</a>
+			<!-- 			</li> -->
 		</ul>
 	</div>
 
-	<button class="btn btn-danger">Delete Account</button>
+
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

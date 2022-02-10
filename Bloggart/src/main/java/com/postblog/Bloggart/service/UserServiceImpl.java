@@ -82,9 +82,14 @@ public class UserServiceImpl implements UserService {
 	public Integer updateTwitterId(String twitter, String email) {
 		return userDao.updateTwitterId(twitter, email);
 	}
-	
+
 	@Override
 	public Integer updateInstagramId(String instagram, String email) {
 		return userDao.updateInstagramId(instagram, email);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		userDao.deleteById(id);
 	}
 }

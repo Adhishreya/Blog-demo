@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,7 @@ import com.postblog.Bloggart.service.UserService;
 
 @Controller
 @SessionAttributes({ "user", "successName" })
+//@RequestMapping("/scoperproxy")
 public class UserController {
 
 	@Autowired
@@ -116,9 +118,10 @@ public class UserController {
 		} catch (EmailAlreadyExistsException e) {
 			modelAndView.addObject("message", e.getMessage());
 			modelAndView.setViewName("register");
+//			modelAndView.
 			return modelAndView;
 		}
-		return new ModelAndView("home", "user", userDto.getUsername());
+		return new ModelAndView("redirect:/login", "user", userDto.getUsername());
 
 	}
 
@@ -129,4 +132,9 @@ public class UserController {
 		return new ModelAndView("user", "userE", userE);
 	}
 
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteUser(@PathVariable("id") Long id) {
+		userService.deleteById(id);
+		return "home";
+	}
 }

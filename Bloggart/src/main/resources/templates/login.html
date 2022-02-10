@@ -39,7 +39,7 @@
 	</nav>
 	<div class="container text-white">
 		<form action="#" method="post" th:action="@{/login}"
-			th:object="${user}">
+			th:object="${updateUser}">
 			<p th:if="${param.error}" class="alert alert-error error">Invalid Email or Password Combination!</p>
 			<label for="emailControl"> Email </label> <input id="emailControl"
 				th:field="*{email}" type="email" required class="form-control">
