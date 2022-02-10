@@ -2,6 +2,7 @@ package com.postblog.Bloggart.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,13 +19,12 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "user")
-@OnDelete(action = OnDeleteAction.CASCADE)
+//
 public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@Column(name="role", columnDefinition = "default user")
 	private String role = "user";
 
 	@Override
@@ -103,7 +103,7 @@ public class UserEntity {
 	private String password;
 
 //	@OneToMany
-//	private List<PostEntity> post;
+//	private Set<PostEntity> post;
 //
 //	@OneToMany
 //	private List<CommentEntity> comments;

@@ -2,7 +2,9 @@ package com.postblog.Bloggart.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,9 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "post")
@@ -20,6 +26,17 @@ public class PostEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
+	Set<CommentEntity> comments;
+
+	public Set<CommentEntity> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentEntity> comments) {
+		this.comments = comments;
+	}
 
 	private String postHeader;
 
@@ -78,7 +95,8 @@ public class PostEntity {
 	}
 
 	@ManyToOne
-	@JoinTable(name = "post_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
+//	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@JoinTable(name = "post_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
 	private UserEntity user;
 
 	private Integer likes = 0;

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.postblog.Bloggart.dto.UserDto;
 import com.postblog.Bloggart.entity.UserEntity;
@@ -33,15 +34,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-//	@GetMapping("/loginSuccess")
-//	public ModelAndView homePageRequest(Authentication authentication) {
-//		ModelAndView model = new ModelAndView();
-//		System.out.println("authentications is " + authentication.getPrincipal());
-//		model.addObject("successName", authentication.getName());
-//		model.setViewName("loginSuccess");
-//		return model;
-//	}
-
 	@ModelAttribute("successName")
 	private String setSessionName() {
 		return "";
@@ -52,29 +44,18 @@ public class UserController {
 		return new UserDto();
 	}
 
-//	@ModelAttribute("instagram")
-//	public UserDto instagramHandle() {
-//		return new UserDto();
-//	}
 
 	@PostMapping("/twitter/save")
 	public String setTwitter(@ModelAttribute("updateUser") UserDto twitter,
 			@ModelAttribute("successName") String email) {
 		System.out.println(twitter);
 		userService.updateTwitterId(twitter.getTwitterId(), email);
-//		UserEntity userE = userService.findByEmail(email);
-//		userE.setTwitterId(twitter);
-//		userService.update(userE);
 		return "redirect:/profile";
 	}
 
 	@PostMapping("/instagram/save")
 	public String setInstagram(@ModelAttribute("updateUser") UserDto instagram,
 			@ModelAttribute("successName") String email) {
-//		UserEntity userE = userService.findByEmail(email);
-//		userE.setInstagramId(instagram);
-//		System.out.println(instagram);
-//		userService.update(userE);
 		userService.updateInstagramId(instagram.getInstagramId(), email);
 		return "redirect:/profile";
 	}
@@ -132,9 +113,9 @@ public class UserController {
 		return new ModelAndView("user", "userE", userE);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String deleteUser(@PathVariable("id") Long id) {
-		userService.deleteById(id);
-		return "home";
-	}
+//	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+//	public String deleteUser(@PathVariable("id") Long id) {
+//		userService.deleteById(id);
+//		return "home";
+//	}
 }

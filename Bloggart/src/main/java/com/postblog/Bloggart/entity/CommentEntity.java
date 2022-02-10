@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "comment")
 public class CommentEntity {
@@ -23,6 +26,7 @@ public class CommentEntity {
 	private Long id;
 
 	@ManyToOne
+//	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name = "comment_post", joinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
 	private PostEntity post;
 

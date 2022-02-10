@@ -17,6 +17,6 @@ public interface UserService extends UserDetailsService {
 
 	Integer updateInstagramId(String instagram, String email);
 	
-	void deleteById(Long id);
+//	void deleteById(Long id);
 
 }
