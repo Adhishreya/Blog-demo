@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -102,8 +103,8 @@ public class UserEntity {
 	private String email;
 	private String password;
 
-//	@OneToMany
-//	private Set<PostEntity> post;
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+	private Set<PostEntity> post;
 //
 //	@OneToMany
 //	private List<CommentEntity> comments;

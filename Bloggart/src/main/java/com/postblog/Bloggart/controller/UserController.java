@@ -113,9 +113,9 @@ public class UserController {
 		return new ModelAndView("user", "userE", userE);
 	}
 
-//	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-//	public String deleteUser(@PathVariable("id") Long id) {
-//		userService.deleteById(id);
-//		return "home";
-//	}
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteUser(@PathVariable("id") Long id) {
+		userService.deleteById(id);
+		return "home";
+	}
 }

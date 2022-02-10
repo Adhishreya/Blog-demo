@@ -88,8 +88,8 @@ public class UserServiceImpl implements UserService {
 		return userDao.updateInstagramId(instagram, email);
 	}
 
-//	@Override
-//	public void deleteById(Long id) {
-//		userDao.deleteById(id);
-//	}
+	@Override
+	public void deleteById(Long id) {
+		userDao.deleteById(id);
+	}
 }
