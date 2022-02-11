@@ -28,8 +28,9 @@
 						aria-current="page" th:href="@{/loginSuccess}">Home</a></li>
 				</ul>
 				<div class="d-flex justify-content-between">
-					<a class="btn btn-success me-2" th:text="${username}"></a> <a
-						class="btn btn-success me-2" th:href="@{/logout}">Logout</a>
+					<a class="btn btn-success me-2" th:href="@{/profile}"><i
+						class="bi bi-person "></i></a> <a class="btn btn-success me-2"
+						th:href="@{/logout}">Logout</a>
 				</div>
 			</div>
 		</div>
@@ -91,71 +92,64 @@
 				</div>
 			</div>
 		</div>
+		<h6 class="m-3">Comments</h6>
 		<ul class="list-group">
 			<li list-group-item th:if="${commentsE.empty}">
 				<ul class="list-group">No Comments available
 				</ul>
 			</li>
-			<!-- 			<li class="list-group-item" th:each="postE : ${commentsE}"> -->
-			<!-- 				<div class="d-flext"> -->
-			<!-- 					<div th:each="userEntity : ${postE.user}"> -->
-			<!-- 						<small th:text="${userEntity.username}"></small> -->
+			<li class="list-group-item" th:each="commentUnit : ${commentsE}">
+				<div class="d-flext">
+					<div th:each="userEntity : ${commentUnit.user}">
+						<small th:text="${userEntity.username}"></small>
+
+						<div th:text="${commentUnit.comment}"></div>
+						~<small th:text="${commentUnit.commentedAt}"></small>
+						<div class="d-flex w-100">
+							<i class="bi bi-heart mx-2"></i>
+							<div th:text=${commentUnit.likes}></div>
+
+							<!-- 							<a th:href="@{${'/commentList/'+postE.id}}"><i -->
+							<!-- 								class="bi bi-menu-up mx-2"></i></a> -->
+
+							<div th:if="${successName == userEntity.email}">
+								<i class="bi bi-trash-fill" data-bs-toggle="modal"
+									data-bs-target="#exampleModal"></i>
+							</div>
+							<!-- 							<div th:if="${successName != userEntity.email}"> -->
+							<!-- 								<a th:href="@{/comment(id=${commentUnit.id})}"><i -->
+							<!-- 									class="bi bi-reply-fill"></i></a> -->
+							<!-- 							</div> -->
 
 
-			<!-- 						<div class="fw-bold" th:text="${postE.postHeader}"></div> -->
-			<!-- 						<div th:text="${postE.postBody}"></div> -->
-			<!-- 						~<small th:text="${postE.postedAtAt}"></small> -->
-			<!-- 						<div class="d-flex w-100"> -->
-			<!-- 							<i class="bi bi-heart mx-2"></i> -->
-			<!-- 							<div th:text=${postE.likes}></div> -->
+							<div class="modal fade" id="exampleModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Delete
+												Post</h5>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<p class="text-danger">This operation cannot be undone</p>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Close</button>
 
-			<!-- 							<a th:href="@{${'/commentList/'+postE.id}}"><i -->
-			<!-- 								class="bi bi-menu-up mx-2"></i></a> -->
+<!-- 											<a class="btn btn-success me-2" -->
+<!-- 												th:href="@{/deleteComment(id=${commentUnit.id})}">Confirm</a> -->
 
-			<!-- 							<div th:if="${successName == userEntity.email}"> -->
-			<!-- 								<i class="bi bi-trash-fill" data-bs-toggle="modal" -->
-			<!-- 									data-bs-target="#exampleModal"></i> -->
-			<!-- 							</div> -->
-			<!-- 							<div th:if="${successName != userEntity.email}"> -->
-			<!-- 								<a th:href="@{/comment(id=${postE.id})}"><i -->
-			<!-- 									class="bi bi-reply-fill"></i></a> -->
-			<!-- 							</div> -->
-
-
-			<!-- 							Modal -->
-			<!-- 							<div class="modal fade" id="exampleModal" tabindex="-1" -->
-			<!-- 								aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-			<!-- 								<div class="modal-dialog"> -->
-			<!-- 									<div class="modal-content"> -->
-			<!-- 										<div class="modal-header"> -->
-			<!-- 											<h5 class="modal-title" id="exampleModalLabel">Delete -->
-			<!-- 												Post</h5> -->
-			<!-- 											<button type="button" class="btn-close" -->
-			<!-- 												data-bs-dismiss="modal" aria-label="Close"></button> -->
-			<!-- 										</div> -->
-			<!-- 										<div class="modal-body"> -->
-			<!-- 											<p class="text-danger">This operation cannot be undone</p> -->
-			<!-- 										</div> -->
-			<!-- 										<div class="modal-footer"> -->
-			<!-- 											<button type="button" class="btn btn-secondary" -->
-			<!-- 												data-bs-dismiss="modal">Close</button> -->
-			<!-- 																						<button type="button" class="btn btn-primary">Save -->
-			<!-- 																							changes</button> -->
-			<!-- 																						<form action="#" method="post" th:action="@{/deletePost}" -->
-			<!-- 																							th:object="${postE}"> -->
-			<!-- 																							<button class="btn btn-success me-2" type="submit">Confirm</button> -->
-			<!-- 																							<a class="btn btn-success me-2" th:href="@{'/deletePost'(id=${postE.id})/}">Confirm</a> -->
-			<!-- 											<a class="btn btn-success me-2" -->
-			<!-- 												th:href="@{/deletePost(id=${postE.id})}">Confirm</a> -->
-			<!-- 																						</form> -->
-			<!-- 										</div> -->
-			<!-- 									</div> -->
-			<!-- 								</div> -->
-			<!-- 							</div> -->
-			<!-- 						</div> -->
-			<!-- 					</div> -->
-			<!-- 				</div> -->
-			<!-- 			</li> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
 		</ul>
 	</div>
 </body>

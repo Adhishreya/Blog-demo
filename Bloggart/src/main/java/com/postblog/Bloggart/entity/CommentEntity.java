@@ -44,11 +44,11 @@ public class CommentEntity {
 		this.comment = comment;
 	}
 
-	@Override
-	public String toString() {
-		return "CommentEntity [id=" + id + ", post=" + post + ", comment=" + comment + ", parentEntity=" + parentEntity
-				+ ", user=" + user + ", commentedAt=" + commentedAt + ", likes=" + likes + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "CommentEntity [id=" + id + ", post=" + post + ", comment=" + comment + ", parentEntity=" + parentEntity
+//				+ ", user=" + user + ", commentedAt=" + commentedAt + ", likes=" + likes + "]";
+//	}
 
 	public void setId(Long id) {
 		this.id = id;

@@ -29,12 +29,12 @@ public class UserEntity implements Serializable {
 
 	private String role = "user";
 
-	@Override
-	public String toString() {
-		return "UserEntity [id=" + id + ", role=" + role + ", username=" + username + ", email=" + email + ", password="
-				+ password + ", image=" + image + ", bio=" + bio + ", post=" + post + ", joinedOn=" + joinedOn
-				+ ", twitterId=" + twitterId + ", instagramId=" + instagramId + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "UserEntity [id=" + id + ", role=" + role + ", username=" + username + ", email=" + email + ", password="
+//				+ password + ", image=" + image + ", bio=" + bio + ", post=" + post + ", joinedOn=" + joinedOn
+//				+ ", twitterId=" + twitterId + ", instagramId=" + instagramId + "]";
+//	}
 
 	public String getRole() {
 		return role;
@@ -135,8 +135,17 @@ public class UserEntity implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<PostEntity> post;
 //
-//	@OneToMany
-//	private List<CommentEntity> comments;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private Set<CommentEntity> comments;
+
+	public Set<CommentEntity> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentEntity> comments) {
+		this.comments = comments;
+	}
+
 
 	@Temporal(TemporalType.DATE)
 	private Date joinedOn;

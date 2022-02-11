@@ -21,4 +21,7 @@ public class CommentService {
 	public List<CommentEntity> findAllByPost(PostEntity post) {
 		return commentDao.findAllByPost(post);
 	}
+	public void deleteById(Long id) {
+		commentDao.deleteById(id);
+	}
 }
