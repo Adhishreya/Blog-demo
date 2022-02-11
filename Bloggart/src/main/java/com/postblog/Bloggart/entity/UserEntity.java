@@ -31,8 +31,8 @@ public class UserEntity {
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", role=" + role + ", username=" + username + ", email=" + email + ", password="
-				+ password + ", joinedOn=" + joinedOn + ", twitterId=" + twitterId + ", instagramId=" + instagramId
-				+ "]";
+				+ password + ", image=" + image + ", bio=" + bio + ", post=" + post + ", joinedOn=" + joinedOn
+				+ ", twitterId=" + twitterId + ", instagramId=" + instagramId + "]";
 	}
 
 	public String getRole() {
@@ -95,6 +95,14 @@ public class UserEntity {
 		return instagramId;
 	}
 
+	public Set<PostEntity> getPost() {
+		return post;
+	}
+
+	public void setPost(Set<PostEntity> post) {
+		this.post = post;
+	}
+
 	public void setInstagramId(String instagramId) {
 		this.instagramId = instagramId;
 	}
@@ -102,6 +110,24 @@ public class UserEntity {
 	private String username;
 	private String email;
 	private String password;
+	private String image;
+	private String bio;
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
 	private Set<PostEntity> post;

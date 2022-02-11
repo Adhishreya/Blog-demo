@@ -27,5 +27,13 @@ public interface UserDao extends JpaRepository<UserEntity, Long> {
 	@Query("update UserEntity u  set u.instagramId = :instagram where u.email = :email")
 	Integer updateInstagramId(@Param("instagram") String instagram, @Param("email") String email);
 
+	@Modifying
+	@Query("update UserEntity u  set u.bio = :bio where u.email = :email")
+	Integer updateBio(@Param("bio") String bio, @Param("email") String email);
+
+	@Modifying
+	@Query("update UserEntity u  set u.image = :image where u.email = :email")
+	Integer updateImage(@Param("image") String image, @Param("email") String email);
+
 	void deleteById(Long id);
 }

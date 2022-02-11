@@ -44,12 +44,25 @@ public class UserController {
 		return new UserDto();
 	}
 
-
 	@PostMapping("/twitter/save")
 	public String setTwitter(@ModelAttribute("updateUser") UserDto twitter,
 			@ModelAttribute("successName") String email) {
 		System.out.println(twitter);
 		userService.updateTwitterId(twitter.getTwitterId(), email);
+		return "redirect:/profile";
+	}
+
+	@PostMapping("/bio/save")
+	public String setBio(@ModelAttribute("updateUser") UserDto bio, @ModelAttribute("successName") String email) {
+		System.out.println(bio);
+		userService.updateBio(bio.getBio(), email);
+		return "redirect:/profile";
+	}
+
+	@PostMapping("/image/save")
+	public String setImage(@ModelAttribute("updateUser") UserDto image, @ModelAttribute("successName") String email) {
+		System.out.println(image);
+		userService.updateTwitterId(image.getImage(), email);
 		return "redirect:/profile";
 	}
 
@@ -116,6 +129,6 @@ public class UserController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable("id") Long id) {
 		userService.deleteById(id);
-		return "home";
+		return "redirect:/home";
 	}
 }

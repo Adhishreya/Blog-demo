@@ -9,11 +9,13 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-	<style>
-	.error{
-	color:red;
-	}
-	</style>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<style>
+.error {
+	color: red;
+}
+</style>
 </head>
 <body class="bg-secondary">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
@@ -31,8 +33,8 @@
 						aria-current="page" th:href="@{/home}">Home</a></li>
 				</ul>
 				<div class="d-flex justify-content-between">
-					<a class="btn btn-success me-2" th:href="@{/login}">Login</a>
-					<a class="btn btn-success" th:href="@{/user/register}">Register</a>
+					<a class="btn btn-success me-2" th:href="@{/login}">Login</a> <a
+						class="btn btn-success" th:href="@{/user/register}">Register</a>
 				</div>
 			</div>
 		</div>
@@ -40,25 +42,44 @@
 	<div class="container text-white">
 		<form action="#" method="post" th:action="@{/login}"
 			th:object="${updateUser}">
-			<p th:if="${param.error}" class="alert alert-error error">Invalid Email or Password Combination!</p>
+			<p th:if="${param.error}" class="alert alert-error error">Invalid
+				Email or Password Combination!</p>
 			<label for="emailControl"> Email </label> <input id="emailControl"
 				th:field="*{email}" type="email" required class="form-control">
 			<p th:each="error:${#fields.errors('email')}" th:text="${error}"></p>
-			<label for="passwordControl"> Password </label> <input
-				id="passwordControl" th:field="*{password}" type="password" required
-				class="form-control">
+			<label for="passwordControl"> Password </label>
+			<div class="d-flex w-100 justify-content-between">
+				<input id="passwordControl" th:field="*{password}" type="password"
+					required class="form-control w-50"><i id="eye"
+					class="bi bi-eye-slash" onClick="showHide()"></i>
+			</div>
+
 			<p th:each="error:${#fields.errors('password')}" th:text="${error}"></p>
 
 			<button type="submit" class="btn btn-success mt-3">Login</button>
 
 		</form>
 		<p>
-			New user? <a th:href="@{/user/register}" class="btn btn-primary text-light">Register</a>
+			New user? <a th:href="@{/user/register}"
+				class="btn btn-primary text-light">Register</a>
 		</p>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
+	<script>
+		function showHide() {
+			var visible = document.getElementById("passwordControl");
+			var eye = document.getElementById("eye");
+			if (visible.type === "password") {
+				visible.type = "text";
+				eye.className="bi bi-eye";
+			} else {
+				visible.type = "password";
+				eye.className="bi bi-eye-slash";
+			}
+		}
+	</script>
 </body>
 </html>

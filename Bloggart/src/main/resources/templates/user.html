@@ -37,8 +37,26 @@
 	</nav>
 	<div class="container  mt-2 h-100">
 		<!-- 		<ul th:if="${userE == null||userE.empty}"></ul> -->
+
+
+
 		<ul th:if="${userE}" class="list-group bg-secondary"
 			th:object="${userE}">
+			<li class="list-group-item bg-secondary" th:if="${userE.image == null}">
+				<i class="bi bi-person-plus-fill"></i>
+			</li>
+			<li class="list-group-item bg-secondary"><form class="w-80" th:action="@{/bio/save}"
+					method="post">
+					<label for="exampleFormControlTextarea1" th:object="${updateUser}">
+						Bio </label>
+
+					<textarea class="form-control w-100" rows="12"
+						id="exampleFormControlTextarea1" placeholder="....."
+						th:value="${userE.bio}?:''	" th:field="*{bio}">
+				</textarea>
+					<br />
+					<button class="btn btn-primary mx-2" type="submit">Save</button>
+				</form></li>
 			<li class="list-group-item bg-secondary" th:text="${userE.username}"></li>
 			<li class="list-group-item bg-secondary" th:text="${userE.email}"></li>
 			<li class="list-group-item bg-secondary"><i
@@ -66,10 +84,50 @@
 					<button class="btn btn-primary mx-2" type="submit">Save</button>
 				</form>
 			</li>
-<!-- 						<li > -->
-			<a class="btn btn-danger" style="width: 15%"
-				th:href="@{${'delete/'+userE.id}}">Delete Account</a>
-<!-- 						</li> -->
+			<!-- 						<li > -->
+			<a class="btn btn-danger" style="width: 15%" data-bs-toggle="modal"
+				data-bs-target="#exampleModal">Delete Account</a>
+			<!-- 						</li> -->
+
+
+
+
+
+
+
+
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Delete
+								Account</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p class="text-danger">This operation cannot be undone</p>
+							<p class="text-secondary">All your activities will be deleted</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+
+							<a class="btn btn-success me-2"
+								th:href="@{${'delete/'+userE.id}}">Confirm</a>
+							<!-- 											</form> -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
 		</ul>
 	</div>
 

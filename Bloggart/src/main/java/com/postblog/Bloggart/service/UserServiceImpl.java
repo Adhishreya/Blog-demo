@@ -21,6 +21,16 @@ import com.postblog.Bloggart.exceptions.EmailAlreadyExistsException;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Override
+	public Integer updateBio(String bio, String email) {
+		return userDao.updateBio(bio, email);
+	}
+
+	@Override
+	public Integer updateImage(String image, String email) {
+		return userDao.updateImage(image, email);
+	}
+
 	@Autowired
 	private UserDao userDao;
 

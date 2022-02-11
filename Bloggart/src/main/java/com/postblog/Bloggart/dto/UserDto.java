@@ -28,6 +28,24 @@ public class UserDto {
 
 	private String twitterId;
 	private String instagramId;
+	private String bio;
+	private String image;
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	@Override
 	public String toString() {
