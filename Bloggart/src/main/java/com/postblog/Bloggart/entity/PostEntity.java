@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -80,6 +82,7 @@ public class PostEntity {
 		this.likes = likes;
 	}
 
+	@Column(length = 65555, columnDefinition = "TEXT")
 	private String postBody;
 
 	@Temporal(TemporalType.DATE)
@@ -94,17 +97,18 @@ public class PostEntity {
 		this.postedAtAt = postedAtAt;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 //	@OnDelete(action = OnDeleteAction.CASCADE)
 //	@JoinTable(name = "post_user", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
+	@JoinTable(name = "post_user")
 	private UserEntity user;
 
 	private Integer likes = 0;
 
-	@Override
-	public String toString() {
-		return "PostEntity [id=" + id + ", postHeader=" + postHeader + ", postBody=" + postBody + ", postedAtAt="
-				+ postedAtAt + ", user=" + user + ", likes=" + likes + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "PostEntity [id=" + id + ", postHeader=" + postHeader + ", postBody=" + postBody + ", postedAtAt="
+//				+ postedAtAt + ", user=" + user + ", likes=" + likes + "]";
+//	}
 
 }

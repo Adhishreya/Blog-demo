@@ -1,5 +1,6 @@
 package com.postblog.Bloggart.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "user")
 //
-public class UserEntity {
+public class UserEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -107,10 +108,12 @@ public class UserEntity {
 		this.instagramId = instagramId;
 	}
 
+	
 	private String username;
 	private String email;
 	private String password;
 	private String image;
+	@Column(length = 65555, columnDefinition = "TEXT")
 	private String bio;
 
 	public String getBio() {
@@ -129,7 +132,7 @@ public class UserEntity {
 		this.image = image;
 	}
 
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<PostEntity> post;
 //
 //	@OneToMany

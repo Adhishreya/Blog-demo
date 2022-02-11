@@ -2,6 +2,9 @@ package com.postblog.Bloggart.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.postblog.Bloggart.dto.UserDto;
 import com.postblog.Bloggart.entity.PostEntity;
 import com.postblog.Bloggart.entity.UserEntity;
 import com.postblog.Bloggart.service.PostService;
@@ -36,17 +40,24 @@ public class PostController {
 //	private String name;
 
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
-	public ModelAndView editPageRequest(@ModelAttribute("successName") String email,Model model) {
+	public ModelAndView editPageRequest(@ModelAttribute("successName") String email, Model model) {
 		ModelAndView modelAndView = new ModelAndView("edit", "post", new PostEntity());
+
 		UserEntity entity = userService.findByEmail(email);
+
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/edit/save", method = RequestMethod.POST)
-	public String savePost(@ModelAttribute("post") PostEntity postEntity, @ModelAttribute("successName") String email) {
+	public String savePost(@ModelAttribute("post") @Valid PostEntity postEntity,
+			@ModelAttribute("successName") String email) {
 		UserEntity entity = userService.findByEmail(email);
+//		entity.getPost().add(postEntity);
+//		UserDto userDto = new UserDto();
+//		BeanUtils.copyProperties(userDto, entity);
 		postEntity.setUser(entity);
 		postService.savePost(postEntity);
+//		userService.update(entity);
 		return "redirect:/loginSuccess/post";
 	}
 
