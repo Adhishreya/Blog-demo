@@ -64,7 +64,8 @@
 								<i class="bi bi-heart mx-2"></i>
 								<div th:text=${postUnit.likes}></div>
 
-								<i class="bi bi-menu-up mx-2"></i>
+								<a th:href="@{${'/commentList/'+postUnit.id}}"><i
+									class="bi bi-menu-up mx-2"></i></a>
 
 								<div th:if="${successName == userEntity.email}">
 									<i class="bi bi-trash-fill" data-bs-toggle="modal"

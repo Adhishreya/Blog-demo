@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,5 +54,19 @@ public class CommentController {
 
 		System.out.println(commentEntity);
 		return "redirect:/loginSuccess/post";
+	}
+
+	@RequestMapping(value = "/commentList/{id}", method = RequestMethod.GET)
+	public ModelAndView getCommentsByPost(@PathVariable("id") Long id,@ModelAttribute("sucessName")String successName) {
+		System.out.println(id);
+		PostEntity post = postService.findById(id);
+		List<CommentEntity> comments = commentService.findAllByPost(post);
+		System.out.println(comments);
+		ModelAndView model = new ModelAndView();
+		model.addObject("commentsE", comments);
+		model.addObject("postE", post);
+		model.setViewName("commentList");
+		model.addObject("successName",successName);
+		return model;
 	}
 }
