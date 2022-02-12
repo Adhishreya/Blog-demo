@@ -1,5 +1,6 @@
 package com.postblog.Bloggart.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class PostService {
 	@Autowired
 	private PostDao postDaol;
 
+	@Autowired
+	private LikesService likesService;
+
 	public void savePost(PostEntity post) {
 		postDaol.save(post);
 	}
@@ -25,10 +29,13 @@ public class PostService {
 
 	public List<PostEntity> postFindAll() {
 		List<PostEntity> posts = postDaol.findAll();
+		List<PostEntity> edited = new ArrayList<>();
 		for (PostEntity p : posts) {
-			System.out.println(p);
+//			System.out.println(p);
+			p.setLikes(likesService.findByPostEntity(p));
+			edited.add(p);
 		}
-		return posts;
+		return edited;
 	}
 
 	public void deletePost(PostEntity post) {

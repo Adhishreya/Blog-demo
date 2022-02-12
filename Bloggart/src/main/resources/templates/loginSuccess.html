@@ -67,7 +67,7 @@
 
 								<div th:if="${successName != userEntity.email}" class="d-flex">
 									<a
-										th:href="@{${'/liked/'+postUnit.id+'/byUser/'+userEntity.id}}"><i
+										th:href="@{${'/liked/'+postUnit.id+'/byUser/'+successName}}"><i
 										class="bi bi-heart mx-2"></i></a>
 									<div th:text=${postUnit.likes}></div>
 									<!-- 										/deletePost(id=${postUnit.id}) -->

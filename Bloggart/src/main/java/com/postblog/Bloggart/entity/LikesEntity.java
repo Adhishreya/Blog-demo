@@ -27,7 +27,8 @@ public class LikesEntity {
 	@Temporal(TemporalType.DATE)
 	private Date postedAtAt = new Date();
 
-	@ManyToOne
+//	@ManyToOne
+	@OneToOne
 	private PostEntity postEntity;
 
 	@Override
@@ -68,7 +69,8 @@ public class LikesEntity {
 		this.userEntity = userEntity;
 	}
 
-	@ManyToOne
+//	@ManyToOne
+	@OneToOne
 	private UserEntity userEntity;
 
 }
