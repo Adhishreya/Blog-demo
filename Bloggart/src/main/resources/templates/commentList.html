@@ -35,9 +35,6 @@
 			</div>
 		</div>
 	</nav>
-
-
-
 	<div class="container">
 		<div class="list-group">
 			<div class="list-group-item" th:object="${postE}">
@@ -121,7 +118,8 @@
 										<div class="modal-header">
 											<h5 class="modal-title" id="exampleModalLabel">Delete
 												Comment</h5>
-											<button type="button" class="btn-close" th:attr="onclick='deleteCommentHide(\''+${commentUnit.id}+'\');'"
+											<button type="button" class="btn-close"
+												th:attr="onclick='deleteCommentHide(\''+${commentUnit.id}+'\');'"
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
@@ -139,35 +137,18 @@
 							</div>
 						</div>
 					</div>
-				</div> <!-- 				<div class="modal fade" id="exampleModal" tabindex="-1" -->
-				<!-- 					aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-				<!-- 					<div class="modal-dialog"> --> <!-- 						<div class="modal-content"> -->
-				<!-- 							<div class="modal-header"> --> <!-- 								<h5 class="modal-title" id="exampleModalLabel">Delete Post</h5> -->
-				<!-- 								<button type="button" class="btn-close" data-bs-dismiss="modal" -->
-				<!-- 									aria-label="Close"></button> --> <!-- 							</div> -->
-				<!-- 							<div class="modal-body"> --> <!-- 								<p class="text-danger">This operation cannot be undone</p> -->
-				<!-- 							</div> --> <!-- 							<div class="modal-footer"> --> <!-- 								<button type="button" class="btn btn-secondary" -->
-				<!-- 									data-bs-dismiss="modal">Close</button> --> <!-- 								<a class="btn btn-success me-2" -->
-				<!-- 									th:href="@{/deleteComment(id=${commentUnit.id})}">Confirm</a> -->
-
-				<!-- 							</div> --> <!-- 						</div> --> <!-- 					</div> --> <!-- 				</div> -->
+				</div>
 			</li>
 		</ul>
 	</div>
 	<script>
 		function deleteComment(c) {
-			// 			console.log(c)
-			// 			var deleteCard = document.getElementById("comm");
 			var deleteCard = document.getElementsByClassName(c)[0];
-			console.log(deleteCard)
 			deleteCard.style.display = "block";
 		}
 
 		function deleteCommentHide(c) {
-			// 			console.log(c)
-			// 			var deleteCard = document.getElementById("comm");
 			var deleteCard = document.getElementsByClassName(c)[0];
-			console.log(deleteCard)
 			deleteCard.style.display = "none";
 		}
 	</script>

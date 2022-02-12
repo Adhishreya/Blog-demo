@@ -60,9 +60,26 @@
 							<div class="fw-bold" th:text="${postUnit.postHeader}"></div>
 							<div th:text="${postUnit.postBody}"></div>
 							~<small th:text="${postUnit.postedAtAt}"></small>
+
+
+
 							<div class="d-flex w-100">
-								<i class="bi bi-heart mx-2"></i>
-								<div th:text=${postUnit.likes}></div>
+
+								<div th:if="${successName != userEntity.email}" class="d-flex">
+									<a
+										th:href="@{${'/liked/'+postUnit.id+'/byUser/'+userEntity.id}}"><i
+										class="bi bi-heart mx-2"></i></a>
+									<div th:text=${postUnit.likes}></div>
+									<!-- 										/deletePost(id=${postUnit.id}) -->
+								</div>
+								<div th:unless="${successName != userEntity.email}"
+									class="d-flex">
+									<i class="bi bi-heart-fill mx-2"></i>
+									<div th:text=${postUnit.likes}></div>
+								</div>
+
+
+
 
 								<a th:href="@{${'/commentList/'+postUnit.id}}"><i
 									class="bi bi-menu-up mx-2"></i></a>
@@ -119,8 +136,8 @@
 			</ul>
 		</div>
 	</div>
-	
-	
+
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
