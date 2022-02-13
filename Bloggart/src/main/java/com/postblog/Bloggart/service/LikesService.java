@@ -54,4 +54,12 @@ public class LikesService {
 	public LikesEntity findByPostEntityAndUserEntity(PostEntity pe, UserEntity ue){
 		return likesDao.findByPostEntityAndUserEntity(pe, ue);
 	}
+	
+	public void deleteByUserEntity(UserEntity ue) {
+		likesDao.deleteByUserEntity(ue);
+	}
+	
+	public void deleteByPostEntity(PostEntity pe) {
+		likesDao.deleteByPostEntity(pe);
+	}
 }

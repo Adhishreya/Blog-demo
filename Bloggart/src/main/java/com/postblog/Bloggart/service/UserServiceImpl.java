@@ -37,6 +37,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private LikesService likesService;
+
 	@Override
 	public UserEntity save(UserDto user) throws EmailAlreadyExistsException {
 		UserEntity userEntity = new UserEntity();
@@ -100,6 +103,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteById(Long id) {
+		likesService.deleteByUserEntity(findById(id));
 		userDao.deleteById(id);
+	}
+
+	@Override
+	public UserEntity findById(Long id) {
+		return userDao.findById(id).get();
 	}
 }

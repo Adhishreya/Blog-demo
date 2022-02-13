@@ -82,15 +82,15 @@ public class PostEntity {
 		this.likes = likes;
 	}
 
-	private boolean likedActive;
-
-	public boolean isLikedActive() {
-		return likedActive;
-	}
-
-	public void setLikedActive(boolean likedActive) {
-		this.likedActive = likedActive;
-	}
+//	private boolean likedActive;
+//
+//	public boolean isLikedActive() {
+//		return likedActive;
+//	}
+//
+//	public void setLikedActive(boolean likedActive) {
+//		this.likedActive = likedActive;
+//	}
 
 	@Column(length = 65555, columnDefinition = "TEXT")
 	private String postBody;

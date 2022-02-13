@@ -71,6 +71,7 @@ public class PostService {
 	}
 
 	public void deleteById(Long id) {
+		likesService.deleteByPostEntity(findById(id));
 		postDaol.deleteById(id);
 	}
 

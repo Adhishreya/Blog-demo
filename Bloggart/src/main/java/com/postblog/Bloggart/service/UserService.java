@@ -10,6 +10,8 @@ public interface UserService extends UserDetailsService {
 	UserEntity save(UserDto user) throws EmailAlreadyExistsException;
 
 	UserEntity findByEmail(String email);
+	
+	UserEntity findById(Long id);
 
 	UserEntity update(UserEntity user);
 
