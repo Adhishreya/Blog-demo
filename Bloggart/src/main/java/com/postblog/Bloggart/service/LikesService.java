@@ -43,4 +43,12 @@ public class LikesService {
 		System.out.println(likesDao.findByPostEntity(pe).size());
 		return likesDao.findByPostEntity(pe).size();
 	}
+	
+//	public List<LikesEntity> findByPostEntityAndUserEntity(PostEntity pe, UserEntity ue){
+//		return likesDao.findByPostEntityAndUserEntity(pe, ue);
+//	}
+	
+	public LikesEntity findByPostEntityAndUserEntity(PostEntity pe, UserEntity ue){
+		return likesDao.findByPostEntityAndUserEntity(pe, ue);
+	}
 }

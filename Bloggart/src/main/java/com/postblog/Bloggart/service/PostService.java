@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.postblog.Bloggart.dao.PostDao;
+import com.postblog.Bloggart.entity.LikesEntity;
 import com.postblog.Bloggart.entity.PostEntity;
 import com.postblog.Bloggart.entity.UserEntity;
 
@@ -34,6 +35,28 @@ public class PostService {
 //			System.out.println(p);
 			p.setLikes(likesService.findByPostEntity(p));
 			edited.add(p);
+		}
+		return edited;
+	}
+
+	public List<Object[]> postFindAllByUserLikes(UserEntity ue) {
+		List<PostEntity> posts = postDaol.findAll();
+//		List<PostEntity> edited = new ArrayList<>();
+		List<Object[]> edited = new ArrayList<>();
+		for (PostEntity p : posts) {
+//			System.out.println(p);
+			Object ob1[] = new Object[2];
+			p.setLikes(likesService.findByPostEntity(p));
+//			edited.add(p);
+			ob1[0] = p;
+			LikesEntity le = likesService.findByPostEntityAndUserEntity(p, ue);
+			if (le == null) {
+				ob1[1] = false;
+			} else {
+				ob1[1] = true;
+			}
+			edited.add(ob1);
+
 		}
 		return edited;
 	}

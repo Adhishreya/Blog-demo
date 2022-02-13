@@ -53,35 +53,39 @@
 				</li>
 				<li class="list-group-item" th:each="postUnit : ${postList}">
 					<div class="d-flext">
-						<div th:each="userEntity : ${postUnit.user}">
+						<div th:each="userEntity : ${postUnit[0].user}">
 							<small th:text="${userEntity.username}"></small>
 
 
-							<div class="fw-bold" th:text="${postUnit.postHeader}"></div>
-							<div th:text="${postUnit.postBody}"></div>
-							~<small th:text="${postUnit.postedAtAt}"></small>
+							<div class="fw-bold" th:text="${postUnit[0].postHeader}"></div>
+							<div th:text="${postUnit[0].postBody}"></div>
+							~<small th:text="${postUnit[0].postedAtAt}"></small>
 
 
 
 							<div class="d-flex w-100">
 
-								<div th:if="${successName != userEntity.email}" class="d-flex">
+								<div th:if="${postUnit[1]==true}" class="d-flex">
 									<a
-										th:href="@{${'/liked/'+postUnit.id+'/byUser/'+successName}}"><i
+										th:href="@{${'/liked/'+postUnit[0].id+'/byUser/'+successName}}"><i
+										class="bi bi-heart-fill mx-2" style="color: red"></i></a>
+									<div th:text=${postUnit[0].likes}></div>
+								</div>
+								<div th:unless="${postUnit[1]==true}" class="d-flex">
+									<a
+										th:href="@{${'/liked/'+postUnit[0].id+'/byUser/'+successName}}"><i
 										class="bi bi-heart mx-2"></i></a>
-									<div th:text=${postUnit.likes}></div>
-									<!-- 										/deletePost(id=${postUnit.id}) -->
-								</div>
-								<div th:unless="${successName != userEntity.email}"
-									class="d-flex">
-									<i class="bi bi-heart-fill mx-2"></i>
-									<div th:text=${postUnit.likes}></div>
+									<div th:text=${postUnit[0].likes}></div>
 								</div>
 
 
+								<!-- 								<div th:unless="${successName != userEntity.email}" -->
+								<!-- 									class="d-flex"> -->
+								<!-- 									<i class="bi bi-heart-fill mx-2"></i> -->
+								<!-- 									<div th:text=${postUnit[0].likes}></div> -->
+								<!-- 								</div> -->
 
-
-								<a th:href="@{${'/commentList/'+postUnit.id}}"><i
+								<a th:href="@{${'/commentList/'+postUnit[0].id}}"><i
 									class="bi bi-menu-up mx-2"></i></a>
 
 								<div th:if="${successName == userEntity.email}">
@@ -89,7 +93,7 @@
 										data-bs-target="#exampleModal"></i>
 								</div>
 								<div th:if="${successName != userEntity.email}">
-									<a th:href="@{/comment(id=${postUnit.id})}"><i
+									<a th:href="@{/comment(id=${postUnit[0].id})}"><i
 										class="bi bi-reply-fill"></i></a>
 								</div>
 
@@ -118,7 +122,7 @@
 												<!-- 												<button class="btn btn-success me-2" type="submit">Confirm</button> -->
 												<!-- 												<a class="btn btn-success me-2" th:href="@{'/deletePost'(id=${postUnit.id})/}">Confirm</a> -->
 												<a class="btn btn-success me-2"
-													th:href="@{/deletePost(id=${postUnit.id})}">Confirm</a>
+													th:href="@{/deletePost(id=${postUnit[0].id})}">Confirm</a>
 												<!-- 											</form> -->
 											</div>
 										</div>

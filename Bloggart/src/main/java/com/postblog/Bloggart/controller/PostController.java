@@ -64,8 +64,9 @@ public class PostController {
 	@RequestMapping(value = "/loginSuccess/post", method = RequestMethod.GET)
 	public ModelAndView onLoadLogin(@ModelAttribute("successName") String email) {
 		UserEntity entity = userService.findByEmail(email);
-		List<PostEntity> postList = postService.postFindAll();
-		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postList);
+//		List<PostEntity> postList = postService.postFindAll();
+		List<Object[]> postLikeList = postService.postFindAllByUserLikes(entity);
+		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postLikeList);
 		return modelAndView;
 	}
 
