@@ -54,9 +54,12 @@
 				<li class="list-group-item" th:each="postUnit : ${postList}">
 					<div class="d-flext">
 						<div th:each="userEntity : ${postUnit[0].user}">
-							<small th:text="${userEntity.username}"></small>
-
-
+							<div th:if="${userEntity.email==successName}">
+								<small>You</small>
+							</div>
+							<div th:unless="${userEntity.email==successName}">
+								<small th:text="${userEntity.username}"></small>
+							</div>
 							<div class="fw-bold" th:text="${postUnit[0].postHeader}"></div>
 							<div th:text="${postUnit[0].postBody}"></div>
 							~<small th:text="${postUnit[0].postedAtAt}"></small>
@@ -67,7 +70,7 @@
 
 								<div th:if="${postUnit[1]==true}" class="d-flex">
 									<a
-										th:href="@{${'/liked/'+postUnit[0].id+'/byUser/'+successName}}"><i
+										th:href="@{${'/removeLike/'+postUnit[0].id+'/byUser/'+successName}}"><i
 										class="bi bi-heart-fill mx-2" style="color: red"></i></a>
 									<div th:text=${postUnit[0].likes}></div>
 								</div>

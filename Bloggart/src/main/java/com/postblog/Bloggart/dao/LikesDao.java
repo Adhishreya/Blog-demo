@@ -21,4 +21,7 @@ public interface LikesDao extends JpaRepository<LikesEntity, Long> {
 
 	public List<LikesEntity> findByPostEntity(PostEntity pe);
 
+//	public void remove(LikesEntity le);
+	public void deleteById(Long id);
+
 }

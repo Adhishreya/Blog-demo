@@ -36,7 +36,10 @@ public class LikesService {
 	public void removeLike(Long postId, String successName) {
 		UserEntity ue = userDao.findByEmail(successName);
 		PostEntity pe = postDao.findById(postId).get();
-		likesDao.findByPostEntityAndUserEntity(pe, ue);
+		LikesEntity le = likesDao.findByPostEntityAndUserEntity(pe, ue);
+		if(le!=null) {
+				likesDao.deleteById(le.getId());
+		}
 	}
 
 	public Integer findByPostEntity(PostEntity pe) {
