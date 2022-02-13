@@ -1,5 +1,6 @@
 package com.postblog.Bloggart.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class LikesService {
 		UserEntity ue = userDao.findByEmail(successName);
 		PostEntity pe = postDao.findById(postId).get();
 		LikesEntity le = likesDao.findByPostEntityAndUserEntity(pe, ue);
-		if(le!=null) {
-				likesDao.deleteById(le.getId());
+		if (le != null) {
+			likesDao.deleteById(le.getId());
 		}
 	}
 
@@ -46,19 +47,33 @@ public class LikesService {
 		System.out.println(likesDao.findByPostEntity(pe).size());
 		return likesDao.findByPostEntity(pe).size();
 	}
-	
+
+	public List<Object[]> findLikedBy(PostEntity pe) {
+		List<Object[]> likedByList = new ArrayList<>();
+
+		List<LikesEntity> likes = likesDao.findByPostEntity(pe);
+		for (LikesEntity l : likes) {
+			Object ob1[] = new Object[2];
+			ob1[0] = l.getUserEntity().getUsername();
+			ob1[1] = l.getPostedAtAt().toString();
+//			System.out.println(ob1[0]+"        "+ob1[1]);
+			likedByList.add(ob1);
+		}
+		return likedByList;
+	}
+
 //	public List<LikesEntity> findByPostEntityAndUserEntity(PostEntity pe, UserEntity ue){
 //		return likesDao.findByPostEntityAndUserEntity(pe, ue);
 //	}
-	
-	public LikesEntity findByPostEntityAndUserEntity(PostEntity pe, UserEntity ue){
+
+	public LikesEntity findByPostEntityAndUserEntity(PostEntity pe, UserEntity ue) {
 		return likesDao.findByPostEntityAndUserEntity(pe, ue);
 	}
-	
+
 	public void deleteByUserEntity(UserEntity ue) {
 		likesDao.deleteByUserEntity(ue);
 	}
-	
+
 	public void deleteByPostEntity(PostEntity pe) {
 		likesDao.deleteByPostEntity(pe);
 	}

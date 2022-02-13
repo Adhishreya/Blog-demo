@@ -1,5 +1,7 @@
 package com.postblog.Bloggart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.postblog.Bloggart.entity.PostEntity;
 import com.postblog.Bloggart.entity.UserEntity;
 import com.postblog.Bloggart.service.LikesService;
 import com.postblog.Bloggart.service.PostService;
@@ -26,8 +29,8 @@ public class LikesController {
 //	@Autowired
 //	private UserService userService;
 //
-//	@Autowired
-//	private PostService postService;
+	@Autowired
+	private PostService postService;
 
 	@Autowired
 	private LikesService likesService;
@@ -44,5 +47,16 @@ public class LikesController {
 		likesService.removeLike(postId, successName);
 		System.out.println("postId " + postId + " userid " + successName);
 		return "redirect:/loginSuccess";
+	}
+
+	@RequestMapping(value = "/likedBy/{postId}", method = RequestMethod.GET)
+	public ModelAndView findLikedBy(@PathVariable("postId") Long id) {
+		PostEntity pe = postService.findById(id);
+		List<Object[]> likes = likesService.findLikedBy(pe);
+		System.out.println("count is " + likes.size());
+		ModelAndView model = new ModelAndView();
+		model.addObject("likes", likes);
+		model.setViewName("likes");
+		return model;
 	}
 }

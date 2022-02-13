@@ -72,13 +72,17 @@
 									<a
 										th:href="@{${'/removeLike/'+postUnit[0].id+'/byUser/'+successName}}"><i
 										class="bi bi-heart-fill mx-2" style="color: red"></i></a>
+									<a th:href="@{${'/likedBy/'+postUnit[0].id}}">
 									<div th:text=${postUnit[0].likes}></div>
+									</a>
 								</div>
 								<div th:unless="${postUnit[1]==true}" class="d-flex">
 									<a
 										th:href="@{${'/liked/'+postUnit[0].id+'/byUser/'+successName}}"><i
 										class="bi bi-heart mx-2"></i></a>
+									<a th:href="@{${'/likedBy/'+postUnit[0].id}}">
 									<div th:text=${postUnit[0].likes}></div>
+									</a>
 								</div>
 
 
