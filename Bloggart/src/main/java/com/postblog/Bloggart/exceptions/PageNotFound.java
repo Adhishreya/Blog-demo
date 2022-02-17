@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-//public class PageNotFound extends Exception{
-//	public PageNotFound() {
-//		super("Page does not Exists 404");
-//	}
-//}
+public class PageNotFound extends Exception{
+	public PageNotFound() {
+		super("Page does not Exists 404");
+	}
+}
 
 //@ResponseStatus(value = HttpStatus.NOT_FOUND)
 //public class PageNotFound extends RuntimeException {
@@ -34,14 +34,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 //	}
 //}
 
-@ControllerAdvice
-public class PageNotFound extends ResponseEntityExceptionHandler {
-	@ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class }) // responding to the
-																								// specified set of
-																								// exception encountered
-	public ResponseEntity<Object> handleConflict(RuntimeException exception, WebRequest request) {
-		String bodyOfResponse = "This should be application specific";
-		return handleExceptionInternal(exception, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
-	}
+//@ControllerAdvice
+//public class PageNotFound extends ResponseEntityExceptionHandler {
+//	@ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class }) // responding to the
+//																								// specified set of
+//																								// exception encountered
+//	public ResponseEntity<Object> handleConflict(RuntimeException exception, WebRequest request) {
+//		String bodyOfResponse = "This should be application specific";
+//		return handleExceptionInternal(exception, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
+//	}
 
-}
+//}

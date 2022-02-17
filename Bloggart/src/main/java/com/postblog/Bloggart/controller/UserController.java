@@ -6,16 +6,20 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +32,6 @@ import com.postblog.Bloggart.service.UserService;
 
 @Controller
 @SessionAttributes({ "user", "successName" })
-//@RequestMapping("/scoperproxy")
 public class UserController {
 
 	@Autowired
@@ -47,21 +50,18 @@ public class UserController {
 	@PostMapping("/twitter/save")
 	public String setTwitter(@ModelAttribute("updateUser") UserDto twitter,
 			@ModelAttribute("successName") String email) {
-		System.out.println(twitter);
 		userService.updateTwitterId(twitter.getTwitterId(), email);
 		return "redirect:/profile";
 	}
 
 	@PostMapping("/bio/save")
 	public String setBio(@ModelAttribute("updateUser") UserDto bio, @ModelAttribute("successName") String email) {
-		System.out.println(bio);
 		userService.updateBio(bio.getBio(), email);
 		return "redirect:/profile";
 	}
 
 	@PostMapping("/image/save")
 	public String setImage(@ModelAttribute("updateUser") UserDto image, @ModelAttribute("successName") String email) {
-		System.out.println(image);
 		userService.updateTwitterId(image.getImage(), email);
 		return "redirect:/profile";
 	}
@@ -75,7 +75,6 @@ public class UserController {
 
 	@GetMapping("/loginSuccess")
 	public String homePageRequest(Model model, Authentication authentication) {
-		System.out.println("authentications is " + authentication);
 		model.addAttribute("successName", authentication.getName());
 		return "redirect:/loginSuccess/post";
 	}
@@ -103,8 +102,6 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("register", "user", userDto);
 		}
-
-		System.out.println(errors);
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			UserEntity userEntity = userService.save(userDto);
@@ -112,7 +109,6 @@ public class UserController {
 		} catch (EmailAlreadyExistsException e) {
 			modelAndView.addObject("message", e.getMessage());
 			modelAndView.setViewName("register");
-//			modelAndView.
 			return modelAndView;
 		}
 		return new ModelAndView("redirect:/login", "user", userDto.getUsername());
@@ -122,7 +118,6 @@ public class UserController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView authenticateUser(@ModelAttribute("successName") String email) {
 		UserEntity userE = userService.findByEmail(email);
-		System.out.println(userE);
 		return new ModelAndView("user", "userE", userE);
 	}
 
@@ -130,5 +125,17 @@ public class UserController {
 	public String deleteUser(@PathVariable("id") Long id) {
 		userService.deleteById(id);
 		return "redirect:/home";
+	}
+
+	@RequestMapping(value = "/username", produces = "application/json", method = RequestMethod.GET)
+	@ResponseBody
+	public String getUserDetailsAuthenticate(Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		return authentication.getName();
+	}
+	
+	@ExceptionHandler(value = Exception.class)
+	public String handleException(Exception exception) {
+		return "error";
 	}
 }

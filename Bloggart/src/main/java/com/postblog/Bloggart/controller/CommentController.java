@@ -47,16 +47,14 @@ public class CommentController {
 			System.out.println("logged in s    " + currentUserName);
 			return currentUserName;
 		}
-		return "asdasdasdasd";
+		return "";
 	}
 
 	@RequestMapping(value = "/comment", method = RequestMethod.GET)
 	public ModelAndView comment(@RequestParam("id") Long id, Model model,
 			@ModelAttribute("successName") String successName) {
 		model.addAttribute("id", id);
-		System.out.println("commenting " + successName);
 		ModelAndView modelAndView = new ModelAndView("comment", "commentObject", new CommentEntity());
-//		modelAndView.addObject("successName", successName);
 		return modelAndView;
 	}
 
@@ -70,17 +68,14 @@ public class CommentController {
 		commentEntity.setUser(entity);
 		commentService.save(commentEntity);
 
-		System.out.println(commentEntity);
 		return "redirect:/loginSuccess/post";
 	}
 
 	@RequestMapping(value = "/commentList/{id}", method = RequestMethod.GET)
 	public ModelAndView getCommentsByPost(@PathVariable("id") Long id,
 			@ModelAttribute("successName") String successName) {
-		System.out.println("name is  " + successName);
 		PostEntity post = postService.findById(id);
 		List<CommentEntity> comments = commentService.findAllByPost(post);
-		System.out.println(comments);
 		ModelAndView model = new ModelAndView();
 		model.addObject("commentsE", comments);
 		model.addObject("postE", post);

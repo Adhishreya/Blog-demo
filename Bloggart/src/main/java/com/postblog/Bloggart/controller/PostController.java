@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,6 @@ public class PostController {
 	private String setSessionName() {
 		return "";
 	}
-//	private String name;
 
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public ModelAndView editPageRequest(@ModelAttribute("successName") String email, Model model) {
@@ -52,19 +52,14 @@ public class PostController {
 	public String savePost(@ModelAttribute("post") @Valid PostEntity postEntity,
 			@ModelAttribute("successName") String email) {
 		UserEntity entity = userService.findByEmail(email);
-//		entity.getPost().add(postEntity);
-//		UserDto userDto = new UserDto();
-//		BeanUtils.copyProperties(userDto, entity);
 		postEntity.setUser(entity);
 		postService.savePost(postEntity);
-//		userService.update(entity);
 		return "redirect:/loginSuccess/post";
 	}
 
 	@RequestMapping(value = "/loginSuccess/post", method = RequestMethod.GET)
 	public ModelAndView onLoadLogin(@ModelAttribute("successName") String email) {
 		UserEntity entity = userService.findByEmail(email);
-//		List<PostEntity> postList = postService.postFindAll();
 		List<Object[]> postLikeList = postService.postFindAllByUserLikes(entity);
 		ModelAndView modelAndView = new ModelAndView("loginSuccess", "postList", postLikeList);
 		return modelAndView;

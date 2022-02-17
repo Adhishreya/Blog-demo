@@ -1,5 +1,6 @@
 package com.postblog.Bloggart.controller;
 
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.postblog.Bloggart.entity.PostEntity;
 
 @Controller
-public class MainController {
+public class MainController implements ErrorController {
 
 	@ModelAttribute("successName")
 	private String setSessionName() {
@@ -41,11 +42,18 @@ public class MainController {
 	public String trendingRender() {
 		return "trending";
 	}
-
 	@GetMapping("/error")
-	public String pageNotFound() {
-		return "pagenotfound";
+	public String handleError() {
+		return "error";
 	}
-
+	
+	
+//	@GetMapping("/error")
+//	public String pageNotFound() {
+//		return "pagenotfound";
+//	}
+	
+//	@RequestMapping("/error")
+	
 //	@ExceptionHandler({)
 }

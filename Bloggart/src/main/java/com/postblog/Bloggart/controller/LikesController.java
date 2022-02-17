@@ -26,9 +26,6 @@ import com.postblog.Bloggart.service.UserService;
 @Controller
 public class LikesController {
 
-//	@Autowired
-//	private UserService userService;
-//
 	@Autowired
 	private PostService postService;
 
@@ -38,14 +35,12 @@ public class LikesController {
 	@RequestMapping("/liked/{postId}/byUser/{userId}")
 	public String likes(@PathVariable("postId") Long postId, @PathVariable("userId") String successName) {
 		likesService.save(postId, successName);
-		System.out.println("postId " + postId + " userid " + successName);
 		return "redirect:/loginSuccess";
 	}
 
 	@RequestMapping("/removeLike/{postId}/byUser/{userId}")
 	public String likesRemove(@PathVariable("postId") Long postId, @PathVariable("userId") String successName) {
 		likesService.removeLike(postId, successName);
-		System.out.println("postId " + postId + " userid " + successName);
 		return "redirect:/loginSuccess";
 	}
 
@@ -53,7 +48,6 @@ public class LikesController {
 	public ModelAndView findLikedBy(@PathVariable("postId") Long id) {
 		PostEntity pe = postService.findById(id);
 		List<Object[]> likes = likesService.findLikedBy(pe);
-		System.out.println("count is " + likes.size());
 		ModelAndView model = new ModelAndView();
 		model.addObject("likes", likes);
 		model.setViewName("likes");
