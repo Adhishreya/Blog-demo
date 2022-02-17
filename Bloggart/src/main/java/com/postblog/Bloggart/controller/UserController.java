@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.postblog.Bloggart.dto.UserDto;
@@ -133,9 +135,18 @@ public class UserController {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		return authentication.getName();
 	}
-	
-	@ExceptionHandler(value = Exception.class)
-	public String handleException(Exception exception) {
-		return "error";
+
+	@ExceptionHandler(Exception.class)
+	public String genericErrorMethod(Exception exception) {
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("error",exception.getMessage());
+//		mav.setViewName("error/404");
+//		return mav;
+		return "redirect:/error";
+	}
+
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public String noResourceHandler(NoHandlerFoundException exception) {
+		return "redirect:/error";
 	}
 }

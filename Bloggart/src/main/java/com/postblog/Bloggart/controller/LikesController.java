@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.postblog.Bloggart.entity.PostEntity;
 import com.postblog.Bloggart.entity.UserEntity;
@@ -52,5 +53,15 @@ public class LikesController {
 		model.addObject("likes", likes);
 		model.setViewName("likes");
 		return model;
+	}
+
+	@ExceptionHandler(Exception.class)
+	public String genericErrorMethod(Exception exception) {
+		return "redirect:/error";
+	}
+
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public String noResourceHandler(NoHandlerFoundException exception) {
+		return "redirect:/error";
 	}
 }

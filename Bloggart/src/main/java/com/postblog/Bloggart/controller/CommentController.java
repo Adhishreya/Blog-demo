@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.postblog.Bloggart.entity.CommentEntity;
 import com.postblog.Bloggart.entity.PostEntity;
@@ -29,7 +32,7 @@ import com.postblog.Bloggart.service.UserService;
 @Controller
 @SessionAttributes({ "successName", "id" })
 public class CommentController {
-
+//	implements ErrorController 
 	@Autowired
 	private UserService userService;
 
@@ -44,7 +47,6 @@ public class CommentController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			String currentUserName = authentication.getName();
-			System.out.println("logged in s    " + currentUserName);
 			return currentUserName;
 		}
 		return "";
@@ -89,4 +91,20 @@ public class CommentController {
 		commentService.deleteById(id);
 		return "redirect:/loginSuccess/post";
 	}
+
+	@ExceptionHandler(Exception.class)
+	public String genericErrorMethod(Exception exception) {
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("error",exception.getMessage());
+//		mav.setViewName("error/404");
+//		return mav;
+		return "redirect:/error";
+	}
+
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public String noResourceHandler(NoHandlerFoundException exception) {
+		System.out.println("404 errrroe");
+		return "redirect:/error";
+	}
+
 }

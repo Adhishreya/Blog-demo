@@ -1,6 +1,10 @@
 package com.postblog.Bloggart.controller;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,12 +16,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.postblog.Bloggart.entity.PostEntity;
+import com.sun.net.httpserver.HttpsServer;
 
 @Controller
 public class MainController implements ErrorController {
-
+//	implements ErrorController
 	@ModelAttribute("successName")
 	private String setSessionName() {
 		return "";
@@ -42,18 +48,28 @@ public class MainController implements ErrorController {
 	public String trendingRender() {
 		return "trending";
 	}
-	@GetMapping("/error")
-	public String handleError() {
-		return "error";
+
+	@RequestMapping("/error")
+	public String handleError(HttpServletRequest request) {
+		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+		System.out.println(status);
+		if (status != null) {
+			Integer statusCode = Integer.valueOf(status.toString());
+			if (statusCode == HttpStatus.NOT_FOUND.value())
+				return "error/404";
+			else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value())
+				return "error/server";
+		}
+		return "error/404";
 	}
-	
-	
-//	@GetMapping("/error")
-//	public String pageNotFound() {
-//		return "pagenotfound";
-//	}
-	
-//	@RequestMapping("/error")
-	
-//	@ExceptionHandler({)
+
+	@ExceptionHandler(Exception.class)
+	public String genericErrorMethod(Exception exception) {
+		return "redirect:/error";
+	}
+
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public String noResourceHandler(NoHandlerFoundException exception) {
+		return "redirect:/error";
+	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.postblog.Bloggart.dto.UserDto;
 import com.postblog.Bloggart.entity.PostEntity;
@@ -76,5 +77,15 @@ public class PostController {
 	public String deletePost(@RequestParam("id") Long id) {
 		postService.deleteById(id);
 		return "redirect:/loginSuccess/post";
+	}
+
+	@ExceptionHandler(Exception.class)
+	public String genericErrorMethod(Exception exception) {
+		return "redirect:/error";
+	}
+
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public String noResourceHandler(NoHandlerFoundException exception) {
+		return "redirect:/error";
 	}
 }

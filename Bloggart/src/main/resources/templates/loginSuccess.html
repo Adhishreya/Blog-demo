@@ -71,27 +71,19 @@
 								<div th:if="${postUnit[1]==true}" class="d-flex">
 									<a
 										th:href="@{${'/removeLike/'+postUnit[0].id+'/byUser/'+successName}}"><i
-										class="bi bi-heart-fill mx-2" style="color: red"></i></a>
-									<a th:href="@{${'/likedBy/'+postUnit[0].id}}">
-									<div th:text=${postUnit[0].likes}></div>
+										class="bi bi-heart-fill mx-2" style="color: red"></i></a> <a
+										th:href="@{${'/likedBy/'+postUnit[0].id}}">
+										<div th:text=${postUnit[0].likes}></div>
 									</a>
 								</div>
 								<div th:unless="${postUnit[1]==true}" class="d-flex">
 									<a
 										th:href="@{${'/liked/'+postUnit[0].id+'/byUser/'+successName}}"><i
-										class="bi bi-heart mx-2"></i></a>
-									<a th:href="@{${'/likedBy/'+postUnit[0].id}}">
-									<div th:text=${postUnit[0].likes}></div>
+										class="bi bi-heart mx-2"></i></a> <a
+										th:href="@{${'/likedBy/'+postUnit[0].id}}">
+										<div th:text=${postUnit[0].likes}></div>
 									</a>
 								</div>
-
-
-								<!-- 								<div th:unless="${successName != userEntity.email}" -->
-								<!-- 									class="d-flex"> -->
-								<!-- 									<i class="bi bi-heart-fill mx-2"></i> -->
-								<!-- 									<div th:text=${postUnit[0].likes}></div> -->
-								<!-- 								</div> -->
-
 								<a th:href="@{${'/commentList/'+postUnit[0].id}}"><i
 									class="bi bi-menu-up mx-2"></i></a>
 
@@ -122,24 +114,13 @@
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-bs-dismiss="modal">Close</button>
-												<!-- 											<button type="button" class="btn btn-primary">Save -->
-												<!-- 												changes</button> -->
-												<!-- 											<form action="#" method="post" th:action="@{/deletePost}" -->
-												<!-- 												th:object="${postUnit}"> -->
-												<!-- 												<button class="btn btn-success me-2" type="submit">Confirm</button> -->
-												<!-- 												<a class="btn btn-success me-2" th:href="@{'/deletePost'(id=${postUnit.id})/}">Confirm</a> -->
 												<a class="btn btn-success me-2"
 													th:href="@{/deletePost(id=${postUnit[0].id})}">Confirm</a>
-												<!-- 											</form> -->
 											</div>
 										</div>
 									</div>
 								</div>
 
-
-								<!-- 							<a><i class="bi bi-trash-fill"></i></a> -->
-								<!-- 							<i -->
-								<!-- 								class="bi bi-three-dots-vertical justify-self-end align-items-center"></i> -->
 							</div>
 						</div>
 					</div>
