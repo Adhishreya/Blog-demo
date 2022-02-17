@@ -3,7 +3,9 @@ package com.postblog.Bloggart.controller;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,12 +25,13 @@ import com.sun.net.httpserver.HttpsServer;
 
 @Controller
 public class MainController implements ErrorController {
+	
 //	implements ErrorController
 	@ModelAttribute("successName")
 	private String setSessionName() {
 		return "";
 	}
-
+	
 	@GetMapping("/home")
 	public String homePageRequest() {
 		return "redirect:/home/post";

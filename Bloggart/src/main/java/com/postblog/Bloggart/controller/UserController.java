@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +36,9 @@ import com.postblog.Bloggart.service.UserService;
 @Controller
 @SessionAttributes({ "user", "successName" })
 public class UserController {
+	
+	@Autowired
+	private Environment env;
 
 	@Autowired
 	UserService userService;
@@ -91,6 +95,7 @@ public class UserController {
 
 	@GetMapping("/login")
 	public String loginUser(WebRequest request, Model model) {
+//		System.out.println("env variable"+env.getProperty("cloudinary_url"));
 		UserDto userDto = new UserDto();
 		model.addAttribute("user", userDto);
 		return "login";
