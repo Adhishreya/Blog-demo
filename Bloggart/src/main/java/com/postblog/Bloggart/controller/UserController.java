@@ -141,6 +141,10 @@ public class UserController {
 		return authentication.getName();
 	}
 
+	@RequestMapping(value="/profile/pic",method=RequestMethod.POST)
+	public String getProfilePic(@) {
+		return "redirect:/home";
+	}
 	@ExceptionHandler(Exception.class)
 	public String genericErrorMethod(Exception exception) {
 //		ModelAndView mav = new ModelAndView();

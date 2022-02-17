@@ -56,9 +56,14 @@ border:none!important;
 			th:object="${userE}">
 			<li class="list-group-item bg-transparent"
 				th:if="${userE.image == null}">
-				<button id="upload_widget" class="cloudinary-button">
+<!-- 				<button id="upload_widget" class="cloudinary-button"> -->
+				<button id="" class="">
 					<i class="bi bi-person-plus-fill"></i>
 				</button>
+				<form th:object="${userE}" th:action="@{/profile/pic}" method="post"
+    enctype="multipart/form-data">
+				<input type="file" accept="image/png, image/jpeg"th:fielf="*{image}">
+				</form>
 			</li>
 			<li class="list-group-item bg-transparent"><form class="w-80"
 					th:action="@{/bio/save}" method="post">
