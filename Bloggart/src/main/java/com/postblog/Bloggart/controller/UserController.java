@@ -1,6 +1,10 @@
 package com.postblog.Bloggart.controller;
 
+import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +25,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.postblog.Bloggart.configurations.ReadProp;
 import com.postblog.Bloggart.dto.UserDto;
 import com.postblog.Bloggart.entity.UserEntity;
 import com.postblog.Bloggart.exceptions.EmailAlreadyExistsException;
 import com.postblog.Bloggart.service.UserService;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+
 @Controller
 @SessionAttributes({ "user", "successName" })
 public class UserController {
-	
+
 	@Autowired
 	private Environment env;
+
+	@Autowired
+	private ReadProp configParam;
 
 	@Autowired
 	UserService userService;
@@ -141,10 +154,26 @@ public class UserController {
 		return authentication.getName();
 	}
 
-	@RequestMapping(value="/profile/pic",method=RequestMethod.POST)
-	public String getProfilePic(@) {
-		return "redirect:/home";
+	@RequestMapping(value = "/profile/pic", method = { RequestMethod.GET, RequestMethod.POST })
+	public String getProfilePic(@RequestParam("image") MultipartFile file, @ModelAttribute("successName") String email)
+			throws IOException {
+		Map config = ObjectUtils.asMap("cloud_name", configParam.getCloud_name(), "api_key", configParam.getApi_key(),
+				"api_secret", configParam.getApi_secret());
+
+		Cloudinary cloudinary = new Cloudinary(config);
+
+		Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+		String upload_url = (String) uploadResult.get("secure_url");
+//		String fileNamae = file.getOriginalFilename();
+//		System.out.println(fileNamae);
+		
+		userService.updateImage((String) uploadResult.get("secure_url"), email);
+		
+		System.out.println("url is   "+uploadResult.get("secure_url"));
+		System.out.println(uploadResult);
+		return "redirect:/profile";
 	}
+
 	@ExceptionHandler(Exception.class)
 	public String genericErrorMethod(Exception exception) {
 //		ModelAndView mav = new ModelAndView();

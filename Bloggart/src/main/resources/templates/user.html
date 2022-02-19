@@ -23,8 +23,9 @@ body {
 	background: radial-gradient(circle, rgba(254, 254, 254, 1) 15%,
 		rgba(223, 219, 219, 1) 42%);
 }
-li{
-border:none!important;
+
+li {
+	border: none !important;
 }
 </style>
 </head>
@@ -52,18 +53,28 @@ border:none!important;
 		</div>
 	</nav>
 	<div class="container  mt-2 h-100">
-		<ul th:if="${userE}" class="list-group bg-transparent" 
+		<ul th:if="${userE}" class="list-group bg-transparent"
 			th:object="${userE}">
 			<li class="list-group-item bg-transparent"
 				th:if="${userE.image == null}">
-<!-- 				<button id="upload_widget" class="cloudinary-button"> -->
+				<!-- 				<button id="upload_widget" class="cloudinary-button"> -->
 				<button id="" class="">
 					<i class="bi bi-person-plus-fill"></i>
-				</button>
-				<form th:object="${userE}" th:action="@{/profile/pic}" method="post"
+				</button> <!-- <form th:object="${userE}" th:action="@{/profile/pic}" method="post"
     enctype="multipart/form-data">
 				<input type="file" accept="image/png, image/jpeg"th:fielf="*{image}">
+				</form> -->
+
+				<form  th:action="@{/profile/pic}" enctype="multipart/form-data" method="post">
+				<input type="file" name="image" accept="image/png, image/jpeg" />
+<!-- 					<input type="file" accept="image/png, image/jpeg"name="image"> -->
+					<input type="submit" value="save">
 				</form>
+
+			</li>
+			<li class="list-group-item bg-transparent"
+				th:unless="${userE.image == null}">
+				<img th:src="@{${userE.image}}" alt="profile pic">
 			</li>
 			<li class="list-group-item bg-transparent"><form class="w-80"
 					th:action="@{/bio/save}" method="post">
@@ -77,10 +88,12 @@ border:none!important;
 					<br />
 					<button class="btn btn-primary mx-2" type="submit">Save</button>
 				</form></li>
-			<li class="list-group-item bg-transparent" ><span>Username: </span><span th:text="${' '+userE.username}"></span></li>
-			<li class="list-group-item bg-transparent" ><span>Email: </span><span th:text="${userE.email}"></span></li>
-			<li class="list-group-item bg-transparent"><span>Joined On: </span><i
-				class="bi bi-calendar-date mx-2"></i><span
+			<li class="list-group-item bg-transparent"><span>Username:
+			</span><span th:text="${' '+userE.username}"></span></li>
+			<li class="list-group-item bg-transparent"><span>Email: </span><span
+				th:text="${userE.email}"></span></li>
+			<li class="list-group-item bg-transparent"><span>Joined
+					On: </span><i class="bi bi-calendar-date mx-2"></i><span
 				th:text="${userE.joinedOn}"></span></li>
 			<li class="list-group-item bg-transparent">
 				<form class="w-80 d-flex" th:action="@{/twitter/save}" method="post">

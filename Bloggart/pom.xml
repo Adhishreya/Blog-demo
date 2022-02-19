@@ -85,11 +85,17 @@
 			<version>2.0.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.cloudinary</groupId> -->
+		<!-- <artifactId>cloudinary-core</artifactId> -->
+		<!-- <version>1.30.0</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>com.cloudinary</groupId>
-			<artifactId>cloudinary-core</artifactId>
+			<artifactId>cloudinary-http44</artifactId>
 			<version>1.30.0</version>
 		</dependency>
+
 
 	</dependencies>
 
