@@ -27,6 +27,12 @@ body {
 li {
 	border: none !important;
 }
+
+#profile {
+	border-radius: 50%;
+	width: 5rem;
+	height: 5rem;
+}
 </style>
 </head>
 <body class="bg-secondary">
@@ -55,26 +61,20 @@ li {
 	<div class="container  mt-2 h-100">
 		<ul th:if="${userE}" class="list-group bg-transparent"
 			th:object="${userE}">
-			<li class="list-group-item bg-transparent"
-				th:if="${userE.image == null}">
-				<!-- 				<button id="upload_widget" class="cloudinary-button"> -->
-				<button id="" class="">
-					<i class="bi bi-person-plus-fill"></i>
-				</button> <!-- <form th:object="${userE}" th:action="@{/profile/pic}" method="post"
-    enctype="multipart/form-data">
-				<input type="file" accept="image/png, image/jpeg"th:fielf="*{image}">
-				</form> -->
-
-				<form  th:action="@{/profile/pic}" enctype="multipart/form-data" method="post">
-				<input type="file" name="image" accept="image/png, image/jpeg" />
-<!-- 					<input type="file" accept="image/png, image/jpeg"name="image"> -->
+			<li class="list-group-item bg-transparent">
+				<div th:if="${userE.image == null}">
+					<button id="" class="">
+						<i class="bi bi-person-plus-fill"></i>
+					</button>
+				</div>
+				<div th:unless="${userE.image == null}">
+					<img th:src="@{${userE.image}}" id="profile" alt="profile pic">
+				</div>
+				<form th:action="@{/profile/pic}" enctype="multipart/form-data"
+					method="post">
+					<input type="file" name="image" accept="image/png, image/jpeg" />
 					<input type="submit" value="save">
 				</form>
-
-			</li>
-			<li class="list-group-item bg-transparent"
-				th:unless="${userE.image == null}">
-				<img th:src="@{${userE.image}}" alt="profile pic">
 			</li>
 			<li class="list-group-item bg-transparent"><form class="w-80"
 					th:action="@{/bio/save}" method="post">
