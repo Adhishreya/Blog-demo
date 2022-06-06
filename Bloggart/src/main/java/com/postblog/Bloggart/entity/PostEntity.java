@@ -39,6 +39,7 @@ public class PostEntity {
 	public void setComments(Set<CommentEntity> comments) {
 		this.comments = comments;
 	}
+	
 
 	private String postHeader;
 

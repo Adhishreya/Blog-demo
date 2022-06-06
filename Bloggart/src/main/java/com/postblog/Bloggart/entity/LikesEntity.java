@@ -27,7 +27,6 @@ public class LikesEntity {
 	@Temporal(TemporalType.DATE)
 	private Date postedAtAt = new Date();
 
-//	@ManyToOne
 	@OneToOne
 	private PostEntity postEntity;
 
