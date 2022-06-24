@@ -1,1 +1,1 @@
-https://cloudinary.com/documentation/upload_widget#api_events
+
